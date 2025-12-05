@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DFLSAIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MA_CODE">
+          <Key>
+            <PropertyRef Name="code" />
+            <PropertyRef Name="vkey" />
+          </Key>
+          <Property Name="code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="vkey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="vkey_seq" Type="int" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" />
+          <Property Name="used" Type="nchar" MaxLength="1" />
+          <Property Name="program_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="cuser" Type="nvarchar" MaxLength="50" />
+          <Property Name="cdate" Type="datetime" />
+          <Property Name="uuser" Type="nvarchar" MaxLength="50" />
+          <Property Name="udate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SITES">
+          <Key>
+            <PropertyRef Name="site_code" />
+          </Key>
+          <Property Name="site_code" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="site_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="site_type" Type="nvarchar" MaxLength="20" />
+          <Property Name="ip_address" Type="nvarchar" MaxLength="20" />
+          <Property Name="port" Type="nvarchar" MaxLength="4" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="postal_code" Type="nvarchar" MaxLength="10" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="state" Type="nvarchar" MaxLength="50" />
+          <Property Name="email_manager" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="acc_store_id" Type="nvarchar" MaxLength="10" />
+          <Property Name="district_code" Type="varchar" MaxLength="4" />
+          <Property Name="delete_flag" Type="bit" />
+          <Property Name="cdate" Type="datetime" />
+          <Property Name="cuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="udate" Type="date" />
+          <Property Name="uuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="site_connection_string" Type="text" />
+          <Property Name="site_serie" Type="varchar" MaxLength="3" />
+          <Property Name="new_erp" Type="bit" Nullable="false" />
+          <Property Name="new_erp_date" Type="datetime" />
+          <Property Name="host_name" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityContainer Name="DFLSAIModelStoreContainer">
+          <EntitySet Name="MA_CODE" EntityType="Self.MA_CODE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SITES" EntityType="Self.SITES" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DFLSAIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SITES">
+          <Key>
+            <PropertyRef Name="site_code" />
+          </Key>
+          <Property Name="site_code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="site_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="site_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ip_address" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="port" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="postal_code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email_manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="acc_store_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="district_code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="delete_flag" Type="Boolean" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <Property Name="cuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="udate" Type="DateTime" Precision="0" />
+          <Property Name="uuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="site_connection_string" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="site_serie" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="new_erp" Type="Boolean" Nullable="false" />
+          <Property Name="new_erp_date" Type="DateTime" Precision="3" />
+          <Property Name="host_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DFLSAIEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SITES" EntityType="Self.SITES" />
+          <EntitySet Name="MA_CODE" EntityType="DFLSAIModel.MA_CODE" />
+        </EntityContainer>
+        <EntityType Name="MA_CODE">
+          <Key>
+            <PropertyRef Name="code" />
+            <PropertyRef Name="vkey" />
+          </Key>
+          <Property Name="code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="vkey" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="vkey_seq" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="used" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="program_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cuser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <Property Name="uuser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="udate" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DFLSAIModelStoreContainer" CdmEntityContainer="DFLSAIEntities">
+          <EntitySetMapping Name="SITES">
+            <EntityTypeMapping TypeName="DFLSAIModel.SITES">
+              <MappingFragment StoreEntitySet="SITES">
+                <ScalarProperty Name="site_code" ColumnName="site_code" />
+                <ScalarProperty Name="site_name" ColumnName="site_name" />
+                <ScalarProperty Name="site_type" ColumnName="site_type" />
+                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+                <ScalarProperty Name="port" ColumnName="port" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="email_manager" ColumnName="email_manager" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="acc_store_id" ColumnName="acc_store_id" />
+                <ScalarProperty Name="district_code" ColumnName="district_code" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="cuser" ColumnName="cuser" />
+                <ScalarProperty Name="udate" ColumnName="udate" />
+                <ScalarProperty Name="uuser" ColumnName="uuser" />
+                <ScalarProperty Name="site_connection_string" ColumnName="site_connection_string" />
+                <ScalarProperty Name="site_serie" ColumnName="site_serie" />
+                <ScalarProperty Name="new_erp" ColumnName="new_erp" />
+                <ScalarProperty Name="new_erp_date" ColumnName="new_erp_date" />
+                <ScalarProperty Name="host_name" ColumnName="host_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MA_CODE">
+            <EntityTypeMapping TypeName="DFLSAIModel.MA_CODE">
+              <MappingFragment StoreEntitySet="MA_CODE">
+                <ScalarProperty Name="udate" ColumnName="udate" />
+                <ScalarProperty Name="uuser" ColumnName="uuser" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="cuser" ColumnName="cuser" />
+                <ScalarProperty Name="program_id" ColumnName="program_id" />
+                <ScalarProperty Name="used" ColumnName="used" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="vkey_seq" ColumnName="vkey_seq" />
+                <ScalarProperty Name="vkey" ColumnName="vkey" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

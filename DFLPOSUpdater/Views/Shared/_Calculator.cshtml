@@ -1,0 +1,85 @@
+﻿<input type="text" value="0" id="result-calculator" readonly />
+<input class="secondaryInput" type="text" value="" id="operation-calculator" readonly />
+<div class="row">    
+    <div class="col-3">
+        <button href="#collapseHistory" data-toggle="collapse" type="button" class="btn btn-history btn-operator" title="Historial" aria-expanded="false" aria-controls="collapseHistory"><i class="fa fa-history"></i></button>
+    </div>
+    <div class="col-6">
+        <button type="button" class="btn btn-clear" id="calculator-clear">C</button>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-divide btn-operator">/</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <button type="button" class="btn calculator-number">1</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn calculator-number">2</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn calculator-number">3</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn btn-multiply btn-operator">X</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <button type="button" class="btn calculator-number">4</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn calculator-number">5</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn calculator-number">6</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn btn-minus btn-operator">-</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <button type="button" class="btn calculator-number">7</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn calculator-number">8</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn calculator-number">9</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn btn-add btn-operator">+</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <button type="button" class="btn calculator-number">0</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn" id="calculator-dot">.</button>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn btn-equal" id="calculator-equal">=</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <button id="close-calculator" class="btn btn-close">Cerrar</button>
+    </div>
+    <div class="col-6">
+        <button class="btn btn-accept" id="calculator-accept">Aceptar</button>
+    </div>
+</div>
+
+
+
+
+<div class="collapseHistory collapse" id="collapseHistory">
+    <div id="idHistory" class="card card-body idHistory">
+        <ul id="listHistorial" class="list-group" style="margin-bottom: 0px;">
+            <li id="elemento_item" class="list-group-item">Historial</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿<div class="col-lg-12">
+    <div class="hpanel" id="divCheckCollapsed">
+        <div class="panel-heading hbuilt">
+            <div class="pull-right" id="DivDistrictSite">
+                @foreach (var item in @Model.Districts)
+                {
+                    <a class="btn btn-default btn-xs" id="@item.Trim()" onclick="CheckSitesDistrict(this.id);">@item.Trim()</a>
+                }
+                <a class="showhide">  <i class="fa fa-chevron-up"></i></a>
+            </div>
+            <i class="fa fa-shopping-cart"></i> SELECCCIONAR TIENDAS
+        </div>
+        <div class="panel-body">
+            <div class="RowCheck row" id="CheckBoxesSites">
+                <div class="col-lg-3 border-right">
+                    <ul id="CheckStores1">
+                        <li id="label_All">
+                            <input type="checkbox" id="All" name="All" class="i-checks" onclick="CheckSitesAll()"><label style="font-size: 12px; font-weight: normal;"> TODAS LAS TIENDAS </label>
+                        </li>
+                        @for (int countCheckSites = 0; countCheckSites < Model.ListPosition.first_column_for_column_4; countCheckSites++)
+                        {
+                            <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" data-toggle="tooltip" data-placement="bottom" title="@Model.Sites[countCheckSites].District - @Model.Sites[countCheckSites].City">
+                                <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();"> <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal;">@Model.Sites[countCheckSites].SiteName.Trim() <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal;"></label> </label>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-lg-3 border-right">
+                    <ul id="CheckStores2">
+                        @for (int countCheckSites = Model.ListPosition.first_column_for_column_4; countCheckSites < Model.ListPosition.second_column_for_column_4; countCheckSites++)
+                        {
+                            <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" data-toggle="tooltip" data-placement="bottom" title="@Model.Sites[countCheckSites].District - @Model.Sites[countCheckSites].City">
+                                <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();"> <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal;">@Model.Sites[countCheckSites].SiteName.Trim() <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal;"></label> </label>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-lg-3 border-right">
+                    <ul id="CheckStores3">
+                        @for (int countCheckSites = Model.ListPosition.second_column_for_column_4; countCheckSites < Model.ListPosition.third_column_for_column_4; countCheckSites++)
+                        {
+                            <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" data-toggle="tooltip" data-placement="bottom" title="@Model.Sites[countCheckSites].District - @Model.Sites[countCheckSites].City">
+                                <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();"> <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal;">@Model.Sites[countCheckSites].SiteName.Trim() <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal;"></label> </label>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-lg-3 ">
+                    <ul id="CheckStores3">
+                        @for (int countCheckSites = Model.ListPosition.third_column_for_column_4; countCheckSites < Model.ListPosition.all_sites_actives; countCheckSites++)
+                        {
+                            <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" data-toggle="tooltip" data-placement="bottom" title="@Model.Sites[countCheckSites].District - @Model.Sites[countCheckSites].City">
+                                <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();"> <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal;">@Model.Sites[countCheckSites].SiteName.Trim() <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal;"></label> </label>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer clearfix">
+            <p class="pull-right" id="count_all_sites_text">Se han seleccionado 0 sucursales.</p>
+        </div>
+    </div>
+</div>
+@Html.Hidden("count_div_panel_checkbox", 0)
+@Html.Hidden("div_panel_inputs", 0)
+@Html.Hidden("div_panel_percentage", 0)

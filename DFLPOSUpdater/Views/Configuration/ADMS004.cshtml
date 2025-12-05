@@ -1,0 +1,288 @@
+﻿@model DFLPOSUpdater.ViewModels.Configuration.ConfigurationAddPagesUser
+@{ ViewBag.Title = "ADMS004"; }
+@section Styles { @Styles.Render("~/bundles/simple_toggle/css") }
+<div class="normalheader transition animated fadeIn">
+    <div class="hpanel">
+        <div class="panel-body">
+            <a class="small-header-action" href="">
+                <div class="clip-header">
+                    <i id="fa" class="fa fa-arrow-up"></i>
+                </div>
+            </a>
+            <div id="hbreadcrumb" class="pull-right m-t-lg">
+                <ol class="hbreadcrumb breadcrumb">
+                    <li><a href="MENADMS000">Configuración</a></li>
+                    <li>
+                        <a href="ADMS007">Administración de Roles y Permisos</a>
+                    </li>
+                    <li class="active">
+                        <span>Tables design</span>
+                    </li>
+                </ol>
+            </div>
+            <h2 class="font-light m-b-xs">
+                Roles de usuario
+            </h2>
+            <small>Asignar roles a usuarios.</small>
+        </div>
+    </div>
+</div>
+<div class="content animate-panel">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="hpanel">
+                <div class="panel-heading">
+                    <div class="panel-tools">
+                        <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        <a class="closebox"><i class="fa fa-times"></i></a>
+                    </div>
+                    Asignación
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label title="Lista de Tiendas" data-toggle="tooltip" data-placement="right">Tiendas</label>
+                                    @Html.DropDownListFor(m => m.Site, Model.SiteList, new { @class = "form-control", @id = "siteDestino", @onchange = "ValidateSite();" })
+                                </div>
+                                <div class="col-md-1">
+                                    <label>Bajas</label>
+                                    <label title="Baja de empleados" data-toggle="tooltip" data-placement="right">
+                                        <input id="UpdateFile" type="file" style="display: none;" onchange="UpdateExcel();" accept=".xlsx" />
+                                        <i class="fa fa-image btn btn-default btn-xl"></i>
+                                    </label>
+                                </div>
+                                <div class=" col-lg-6">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <h4 id="labelCreditor" class="text-success pull-right">Roles</h4>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <label class="switch">
+                                                <input id="checkView" type="checkbox" onclick="ChangeValues(this);">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-5 pull-left">
+                                            <h4 id="labelSite" class="pull-left">Status y Migración</h4>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 contact-panel" style="">
+                            <div class="hpanel hgreen">
+                                <div class="panel-heading hbuilt">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Usuarios del Sistema
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form action="">
+                                                <div class="input-group">
+                                                    <input id="searchUsers" type="text" class="form-control input-xs" placeholder="Buscar Rol..." onkeyup="searchLists('UsersList,#searchUsers');" />
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-xs btn-default" type="button" onclick="searchLists('UsersList,#searchUsers');">
+                                                            <span class="fa fa-search"></span>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body no-padding" style="display: block;">
+                                    <ul id="UsersList" class="list-group">
+                                        @foreach (var item in Model.Users)
+                                        {
+                                            <li class="list-group-item">
+                                                <p class="radio"><input type="radio" name="Users" value="@item.emp_no.ToString()"> @item.first_name @item.last_name (@item.user_name.ToString() #: @item.emp_no )  </p>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="panel-footer" style="display: block;">
+                                    Lista de usuarios disponibles en el sistema.
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Tab1" class="animate-panel" data-effect="fadeInRight">
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <div class="col-lg-5  contact-panel" style="">
+                                        <div class="hpanel hblue">
+                                            <div class="panel-heading hbuilt">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        Roles Asignados
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <form action="">
+                                                            <div class="input-group">
+                                                                <input id="searchListassigned" type="text" class="form-control input-xs" placeholder="Buscar Rol..." onkeyup="searchLists('assignedList,#searchListassigned');" />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-xs btn-default" type="button" onclick="searchLists('assignedList,#searchListassigned');">
+                                                                        <span class="fa fa-search"></span>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body no-padding" style="display: block;">
+                                                <ul id="assignedList" class="list-group"></ul>
+                                            </div>
+                                            <div class="panel-footer" style="display: block;">
+                                                Lista de roles asignadas al usuario seleccionado. (<a href="ADMS002" title="Agregar Mas Roles" data-toggle="tooltip" data-placement="top">Agregar Mas</a>)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 text-center contact-panel float-e-margins" style="display: block;">
+                                        <p>
+                                            <button type="button" class="btn btn-outline  w-xs btn-info" onclick="RemoveFromUser();">></button>
+                                            <button type="button" class="btn btn-outline  w-xs btn-danger" onclick="RemoveFromRoleAll();">>></button>
+                                            <button type="button" class="btn btn-outline  w-xs btn-info" onclick="AddToUser();"><</button>
+                                            <button type="button" class="btn btn-outline  w-xs btn-danger" onclick="AddToRoleAll();"><<</button>
+                                        </p>
+                                        
+                                    </div>
+                                    <div class="col-lg-5  contact-panel" style="">
+                                        <div class="hpanel hblue">
+                                            <div class="panel-heading hbuilt">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        Roles Disponibles
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <form action="">
+                                                            <div class="input-group">
+                                                                <input id="searchListavailable" type="text" class="form-control input-xs" placeholder="Buscar Rol..." onkeyup="searchLists('availableList,#searchListavailable');" />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-xs btn-default" type="button" onclick="searchLists('availableList,#searchListavailable');">
+                                                                        <span class="fa fa-search"></span>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body no-padding" style="display: block;">
+                                                <ul id="availableList" class="list-group"></ul>
+                                            </div>
+                                            <div class="panel-footer" style="display: block;">
+                                                Lista de roles disponibles. (<a href="ADMS002" title="Agregar Mas Roles" data-toggle="tooltip" data-placement="top">Agregar Mas</a>)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Tab2" class="animate-panel hide" data-effect="fadeInRight">
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <div class="hpanel panel-group hgreen">
+                                        <div class="panel-heading hbuilt">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    Usuarios del Sistema
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Estatus Usuario</label>
+                                                    <select id="user_status" class="form-control select2" onchange="OnChangeSelect2();">
+                                                        <option value="">Selecciona una Opción</option>
+                                                        <option value="A">Activado</option>
+                                                        <option value="B">Bloqueado</option>
+                                                        <option value="I">Inactivo</option>
+                                                        <option value="E">Dado de Baja</option>
+                                                    </select>
+                                                    <p id="pending" class="hide" style="margin-top:20px; color:red"><b>Este usuario se encuentra en estado Pendiente, seleccione otra opción.</b></p>
+
+                                                    <label id="pendingDepartmentLabel" style="margin-top:40px;">Departamento del Usuario</label>
+                                                    <select class="form-control select2" id="user_department" onchange="OnChangeDepartmentSelect2();">
+                                                        <option value="">Selecciona una Departamento</option>
+                                                        @foreach (var item in Model.ListDepartment)
+                                                        {
+                                                            <option value="@item.vkey_seq">@item.description</option>
+                                                        }
+                                                    </select>
+                                                    <p id="pendingDepartment" class="hide" style="margin-top:20px; color:red"><b>Este usuario no tiene ningun departamento asignado.</b></p>
+                                                    <br />
+                                                    <button class="btn btn-success btn-block" onclick="MigrateUsers();"><i class="fa fa-check"></i>Migrar Usuario</button>
+                                                    <br />
+                                                        <input type="checkbox" id="OldVersion">
+                                                        <label  data-toggle="tooltip" data-placement="bottom" title="Versión anterior la cual permite migrar de cualquier tienda, la versión nueva solo permite de TIJUANA a cualquier tienda pero es más rápido.">&nbsp; Migracion lenta</label>
+                                                   
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <div class="hpanel hblue">
+                                                        <div class="panel-heading hbuilt">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    Tiendas 
+                                                                    <button class="btn btn-xs btn-default" type="button" onclick="SelectAllStores();" title="Selecciónar Todas Las Tiendas" data-toggle="tooltip" data-placement="top">
+                                                                    <span class="fa fa-check"></span></button>
+                                                                    <button class="btn btn-xs btn-default" type="button" onclick="UnSelectAllStores();" title="Borrar Selección" data-toggle="tooltip" data-placement="top">
+                                                                        <span class="fa fa-remove"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <form action="">
+                                                                        <div class="input-group">
+                                                                            <input id="searchStore" type="text" class="form-control input-xs" placeholder="Buscar Rol..." onkeyup="searchLists('MigrateStores,#searchStore');" />
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn btn-xs btn-default" type="button" onclick="searchLists('MigrateStores,#searchStore');">
+                                                                                    <span class="fa fa-search"></span>
+                                                                                </button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <ul id="MigrateStores" class="list-group">
+                                                            @foreach (var item in Model.SiteList)
+                                                            {
+                                                                if (@item.Text != "Seleccione una opción" && @item.Value != "0011")
+                                                                {
+                                                                    <li class='list-group-item'>
+                                                                        <p class='checkbox'>
+                                                                            <input type='checkbox' name='MigrateStores' value="@item.Value"> @item.Text
+                                                                        </p>
+                                                                    </li>
+                                                                }
+                                                            }
+                                                        </ul>
+                                                        <div class="panel-footer" style="display: block;">
+                                                            Lista de Tiendas a Cuales Migrar.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/slimscroll/js")
+    @Scripts.Render("~/bundles/ADMS004/js")
+}

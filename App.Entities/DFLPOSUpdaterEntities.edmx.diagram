@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b9ae426ec91d4c7aa736daaaa96314b8" Name="Diagram1">
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.C__MigrationHistory" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.AspNetUsers" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.HistorialDistribucion" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.PosVersionFiles" Width="1.5" PointX="13" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.PosVersions" Width="1.5" PointX="10.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.SiteHealthChecks" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.Sucursales" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.SYS_LOG" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.SYS_PAGE_MASTER" Width="1.5" PointX="8" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.SYS_ROLE_MASTER" Width="1.5" PointX="8" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.SYS_ROLE_PAGE" Width="1.5" PointX="10.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.SYS_ROLE_USER" Width="1.5" PointX="10.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.sysdiagrams" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.UpdateJobs" Width="1.5" PointX="13" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.UpdateJobTargets" Width="1.5" PointX="15.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.UpdateLogs" Width="1.5" PointX="17.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.USER_LOGGING" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.USER_MASTER" Width="1.5" PointX="8" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.USER_PWD" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.VersionPos" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.AggregatedCounter" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.Counter" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.Hash" Width="1.5" PointX="14.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.Job" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.JobParameter" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.JobQueue" Width="1.5" PointX="15.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.List" Width="1.5" PointX="15.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.Schema" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.Server" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.Set" Width="1.5" PointX="16.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.State" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.SitesConfig" Width="1.5" PointX="16.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK__PosVersio__Versi__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK__UpdateJob__Versi__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK_SYS_ROLE_PAGE_SYS_PAGE_MASTER" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK_SYS_ROLE_PAGE_SYS_ROLE_PAGE" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK_SYS_ROLE_USER_SYS_ROLE_MASTER" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK_SYS_ROLE_USER_USER_MASTER" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK__UpdateJob__JobId__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK__UpdateLog__Targe__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK_USER_MASTER_USER_PWD" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK_HangFire_JobParameter_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK_HangFire_State_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.SYS_LOG_CONNECTION" Width="1.5" PointX="3.375" PointY="17.75" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.SITE_CONFIG" Width="1.5" PointX="5.375" PointY="18.75" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.DFLPOS_DISTRIBUTION" Width="1.5" PointX="9.625" PointY="19" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.DFLPOS_SITES" Width="1.5" PointX="7.375" PointY="19" />
+        <EntityTypeShape EntityType="DFLPOS_UPDATERModel.DFLPOS_VERSIONS" Width="1.5" PointX="7.375" PointY="24" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK__DFLPOS_DI__site___4E53A1AA" />
+        <AssociationConnector Association="DFLPOS_UPDATERModel.FK__DFLPOS_DI__versi__4D5F7D71" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

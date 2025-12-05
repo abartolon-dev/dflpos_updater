@@ -1,0 +1,200 @@
+﻿@model DFLPOSUpdater.ViewModels.RegisterUserMaster
+@{ ViewBag.Title = "ADMS006"; }
+
+<div class="normalheader transition animated fadeIn">
+    <div class="hpanel">
+        <div class="panel-body">
+            <a class="small-header-action" href="">
+                <div class="clip-header">
+                    <i id="fa" class="fa fa-arrow-up"></i>
+                </div>
+            </a>
+            <div id="hbreadcrumb" class="pull-right m-t-lg">
+                <ol class="hbreadcrumb breadcrumb">
+                    <li><a href="MENADMS000">Configuración</a></li>
+                    <li>
+                        <a href="ADMS005">Editar Información</a>
+                    </li>
+                    <li class="active">
+                        <span>Editar</span>
+                    </li>
+                </ol>
+            </div>
+            <h2 class="font-light m-b-xs">
+                Perfil de Usuario
+            </h2>
+            <small>Editar Información de Usuario</small>
+        </div>
+    </div>
+</div>
+<div class="content animate-panel">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="hpanel hblue">
+                <div class="panel-body">
+                    <div class="pull-right text-right">
+                        <div class="btn-group">
+                            <label title="Agregar Fotografía" data-toggle="tooltip" data-placement="top">
+                                <input id="UpdateFile" type="file" style="display: none;" onchange="UpdateImg();" accept="image/*" />
+                                <i class="fa fa-image btn btn-default btn-xl"></i>
+                            </label>
+                        </div>
+                        @if (@Model.photo != null)
+                        {
+                            <div class="btn-group">
+                                <label title="Eliminar fotografía" data-toggle="tooltip" data-placement="top">
+                                    <input id="DeleteFile" type="button" style="display: none;" onclick="DeletePicture()" />
+                                    <i class="fa fa-trash btn btn-default btn-xl"></i>
+                                </label>
+                            </div>
+                        }
+                    </div>
+                    <div class="m">
+                        @if (@Model.photo != null)
+                        {
+                            var imgSrc = String.Format("data:image;base64,{0}", Convert.ToBase64String(Model.photo));
+                            <img id="imgDB" src="@imgSrc" class="img-circle m-b" width="80" height="80" />
+                            <i id="Imagecontainer" class="img-circle m-b"></i>
+                        }
+                        else
+                        {
+                            <i id="Imagecontainer" class="fa pe-7s-id fa-5x"></i>
+                        }
+                    </div>
+                    <h3># Empleado: <span id="EmpNumber" class="font-bold">@Model.EmployeeNumber</span></h3>
+                    <div id="NameText" class="text-muted font-bold m-b-xs">@Model.FirstName @Model.LastName</div>
+                    <div class="progress CustomProgress">
+                        <div id="FileProgress"
+                             class="progress-bar" role="progressbar"
+                             aria-valuenow="0" aria-valuemin="0"
+                             aria-valuemax="100" style="width: 0%;">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="hpanel">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab-1">Información Personal</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-2">Contraseña</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("ADMS006", "Configuration", FormMethod.Post, new { name = "form", id = "form" }))
+                            {
+                                <div class="row">
+                                    <div class="form-group col-lg-12">
+                                        <label for="username" title="Alias del usuario" data-toggle="tooltip" data-placement="right">Usuario</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-smile-o"></span>
+                                            </span>
+                                            @Html.TextBoxFor((x => x.Username), new { @class = "form-control readonly", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label title="Nombre" data-toggle="tooltip" data-placement="right">Nombre</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-user"></span>
+                                            </span>
+                                            @Html.TextBoxFor((x => x.FirstName), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label title="Apellidos" data-toggle="tooltip" data-placement="right">Apellidos</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-user"></span>
+                                            </span>
+                                            @Html.TextBoxFor((x => x.LastName), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label title="Número teléfonico o ext." data-toggle="tooltip" data-placement="right">Teléfono</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-phone"></span>
+                                            </span>
+                                            @Html.TextBoxFor((x => x.Phone), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label title="Número de celular" data-toggle="tooltip" data-placement="right">Celular</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-mobile"></span>
+                                            </span>
+                                            @Html.TextBoxFor((x => x.Cellphone), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-lg-6">
+                                        <div>
+                                            <label title="Fecha Nacimiento" data-toggle="tooltip" data-placement="right">Fecha Nacimiento</label>
+                                            <div class="input-group date" id="datapicker1">
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-calendar"></span>
+                                                </span>
+                                                @Html.TextBoxFor((x => x.DateOfBirth), new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label title="Correo electrónico" data-toggle="tooltip" data-placement="right">Correo</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-at"></span>
+                                            </span>
+                                            @Html.TextBoxFor((x => x.Email), new { @class = "form-control", @onblur = "ValidEmailClientSide();", @style="text-transform: lowercase"  })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <div class="text-left">
+                                            <button class="btn btn-success"><i class="fa fa-save"></i> Actualizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("ADMS006", "Configuration", FormMethod.Post, new { name = "formPass", id = "formPass" }))
+                            {
+                                <div class="form-group col-lg-6">
+                                    <label title="Contraseña" data-toggle="tooltip" data-placement="right">Contraseña</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-key"></span>
+                                        </span>
+                                        @Html.PasswordFor((x => x.Password), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label title="Repetir Contraseña" data-toggle="tooltip" data-placement="right">Repetir Contraseña</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-key"></span>
+                                        </span>
+                                        @Html.PasswordFor((x => x.RepeatPassword), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <div class="text-left">
+                                        <button class="btn btn-success"><i class="fa fa-save"></i> Actualizar</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts { @Scripts.Render("~/bundles/ADMS006/js") }

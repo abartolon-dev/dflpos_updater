@@ -1,0 +1,47 @@
+﻿@model List<App.DAL.Configuration.SiteViewModel>
+@{
+    ViewBag.Title = "Store";
+    Layout = "~/Views/Shared/_LayoutSelect.cshtml";
+}
+
+<div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>Espere Por Favor..</h1><p>Su petición se está procesando. </p><div class="spinner"> <div class="rect1"></div> <div class="rect2"></div> <div class="rect3"></div> <div class="rect4"></div> <div class="rect5"></div> </div> </div> </div>
+@if (Request.Browser.Browser.ToUpper().Contains("INTERNETEXPLORER"))
+{<p class="alert alert-danger">Usted está usando un navegador <strong>EXPLORER</strong>.  Le sugerimos utilizar cualquiera de los siguientes navegadores <strong>(Chrome,Opera)</strong>.</p>}
+<div class="back-link">
+    <h1>
+        <img src="~/Content/img/logo florido azul.png" height="80" width="100">
+    </h1>
+</div>
+<div class="color-line"></div>
+<div class="login-container  animate-panel">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center m-b-md">
+                <h3>Florido Administración POS</h3>
+                <small>Sistema Administración</small>
+            </div>
+            <div class="hpanel">
+                <div class="panel-body">
+                    <div class="form-group" title="Favor de seleccionar una sucursal" data-placement="left" data-toggle="tooltip">
+                        <select name="listbox" id="Combo" class="form-control">
+                            @foreach (var item in Model)
+                            {
+
+                                <option value="@item.ip_address">
+                                    @item.site_name
+                                </option>
+                            }
+                        </select>
+                    </div>
+                    <br />
+                    <button class="btn btn-success btn-block" onclick="selectIp()"><i class="fa fa-check"></i>  Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <strong> Florido Administración POS</strong>2025 &copy; Distribuidora el Florido S.A. de C.V.
+        </div>
+    </div>
+</div>

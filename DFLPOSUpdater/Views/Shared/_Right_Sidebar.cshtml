@@ -1,0 +1,29 @@
+﻿@using System.Data
+@model DFLPOSUpdater.ViewModels.Home.RightSidebarViewModel
+
+<div id="right-sidebar" class="animated fadeInRight">
+
+    <div class="p-m">
+        <button id="sidebar-close" class="right-sidebar-toggle sidebar-button btn btn-default m-b-md">
+            <i class="pe pe-7s-close"></i>
+        </button>
+        <div>
+            <span class="font-bold no-margins">Tipo de cambio </span>
+            <br>
+            <small>Hoy @DateTime.Now.Date.ToString("dd/MM/yyyy"), el precio del dólar es de:</small>
+            <br>
+        </div>
+        <div class="row m-t-sm m-b-sm">
+            <div class="col-lg-6">
+                <h3 class="no-margins font-extra-bold text-success">@Model.BanxicoCurrency</h3>
+
+                <div class="font-bold">Banxico <i class="fa fa-money text-success"></i></div>
+            </div>
+            <div class="col-lg-6">
+                <h3 class="no-margins font-extra-bold text-success">@Model.ComercialCurrency</h3>
+
+                <div class="font-bold">Comercial <i class="fa fa-money text-success"></i></div>
+            </div>
+        </div>
+    </div>
+</div>

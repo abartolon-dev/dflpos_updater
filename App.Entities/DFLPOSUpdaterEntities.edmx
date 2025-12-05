@@ -1,0 +1,2210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DFLPOS_UPDATERModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DFLPOS_DISTRIBUTION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version_id" Type="int" />
+          <Property Name="site_id" Type="int" />
+          <Property Name="estate" Type="nvarchar" MaxLength="20" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="cdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DFLPOS_SITES">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="ip" Type="nvarchar" MaxLength="100" />
+          <Property Name="ftp_user" Type="nvarchar" MaxLength="100" />
+          <Property Name="ftp_password" Type="nvarchar" MaxLength="100" />
+          <Property Name="destination_route" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DFLPOS_VERSIONS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="version" Type="nvarchar" MaxLength="20" />
+          <Property Name="files" Type="nvarchar" MaxLength="200" />
+          <Property Name="upload_date" Type="datetime" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HistorialDistribucion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sucursal" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Version" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaEnvio" Type="datetime" Nullable="false" />
+          <Property Name="Exitoso" Type="bit" Nullable="false" />
+          <Property Name="Resultado" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PosVersionFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VersionId" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="260" Nullable="false" />
+          <Property Name="FileSizeBytes" Type="bigint" Nullable="false" />
+          <Property Name="FileHashSha256" Type="varbinary" MaxLength="32" Nullable="false" />
+          <Property Name="StoragePath" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="IsRequired" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PosVersions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VersionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChangeLog" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsDraft" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SITE_CONFIG">
+          <Key>
+            <PropertyRef Name="site_code" />
+          </Key>
+          <Property Name="site_code" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="site_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="site_irs_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="site_rfc" Type="varchar" MaxLength="12" />
+          <Property Name="tax_regime" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="site_state" Type="nvarchar" MaxLength="50" />
+          <Property Name="site_city" Type="nvarchar" MaxLength="50" />
+          <Property Name="site_address" Type="nvarchar" MaxLength="50" />
+          <Property Name="site_zipcode" Type="varchar" MaxLength="50" />
+          <Property Name="site_user_server" Type="nvarchar" MaxLength="50" />
+          <Property Name="site_user_pwd" Type="nvarchar" MaxLength="50" />
+          <Property Name="desk_app_con" Type="varbinary" MaxLength="300" />
+          <Property Name="movil_app_con" Type="varbinary" MaxLength="300" />
+          <Property Name="cdate" Type="datetime" />
+          <Property Name="cuser" Type="nvarchar" MaxLength="50" />
+          <Property Name="udate" Type="datetime" />
+          <Property Name="uuser" Type="nvarchar" MaxLength="50" />
+          <Property Name="program_id" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SiteHealthChecks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteId" Type="int" Nullable="false" />
+          <Property Name="CheckedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="RemotePath" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="260" Nullable="false" />
+          <Property Name="ExistsFlag" Type="bit" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DFLPOS_UPDATER.dbo.SitesConfig' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="SitesConfig">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FtpHost" Type="nvarchar(max)" />
+          <Property Name="FtpUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="FtpPassEnc" Type="nvarchar(max)" />
+          <Property Name="DestPath" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sucursales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IpServidor" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RutaBase" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SYS_LOG">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TableName" Type="varchar" MaxLength="50" />
+          <Property Name="idAfect" Type="nvarchar" MaxLength="20" />
+          <Property Name="Action" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="20" />
+          <Property Name="uuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="time" Type="varchar" MaxLength="20" />
+          <Property Name="Menu" Type="varchar" MaxLength="50" />
+          <Property Name="Cdate" Type="datetime" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Program_id" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SYS_LOG_CONNECTION">
+          <Key>
+            <PropertyRef Name="conn_code" />
+          </Key>
+          <Property Name="conn_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_no" Type="nvarchar" MaxLength="20" />
+          <Property Name="connlog_date" Type="datetime" />
+          <Property Name="connlogout_date" Type="datetime" />
+          <Property Name="cdate" Type="datetime" />
+          <Property Name="conn_status" Type="bit" />
+        </EntityType>
+        <EntityType Name="SYS_PAGE_MASTER">
+          <Key>
+            <PropertyRef Name="page_id" />
+          </Key>
+          <Property Name="page_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="page_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="100" />
+          <Property Name="url" Type="nvarchar" MaxLength="100" />
+          <Property Name="active_flag" Type="bit" />
+          <Property Name="level_1_menu" Type="nvarchar" MaxLength="20" />
+          <Property Name="level_2_menu" Type="nvarchar" MaxLength="20" />
+          <Property Name="level_3_menu" Type="nvarchar" MaxLength="20" />
+          <Property Name="type" Type="nvarchar" MaxLength="10" />
+          <Property Name="menu_sequence" Type="int" />
+          <Property Name="cdate" Type="datetime" />
+          <Property Name="cuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="udate" Type="datetime" />
+          <Property Name="uuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="program_id" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SYS_ROLE_MASTER">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="role_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="role_description" Type="nvarchar" MaxLength="100" />
+          <Property Name="active_flag" Type="bit" />
+          <Property Name="cdate" Type="datetime" />
+          <Property Name="cuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="udate" Type="datetime" />
+          <Property Name="uuser" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SYS_ROLE_PAGE">
+          <Key>
+            <PropertyRef Name="page_id" />
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="page_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="role_id" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="cdate" Type="datetime" />
+          <Property Name="cuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="udate" Type="datetime" />
+          <Property Name="uuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="program_id" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SYS_ROLE_USER">
+          <Key>
+            <PropertyRef Name="role_id" />
+            <PropertyRef Name="emp_no" />
+          </Key>
+          <Property Name="role_id" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="emp_no" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="cdate" Type="datetime" />
+          <Property Name="cuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="udate" Type="datetime" />
+          <Property Name="uuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="program_id" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UpdateJobs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VersionId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="120" Nullable="false" />
+          <Property Name="ScheduledAt" Type="datetime2" Precision="7" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UpdateJobTargets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobId" Type="int" Nullable="false" />
+          <Property Name="SiteId" Type="int" Nullable="false" />
+          <Property Name="TargetPath" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="FtpHost" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FtpUser" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FtpPassEnc" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="LastMessage" Type="nvarchar" MaxLength="4000" />
+          <Property Name="StartedAt" Type="datetime2" Precision="7" />
+          <Property Name="EndedAt" Type="datetime2" Precision="7" />
+          <Property Name="BackupPath" Type="nvarchar" MaxLength="1024" />
+          <Property Name="RemoteVersion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UpdateLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TargetId" Type="bigint" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Level" Type="tinyint" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="4000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER_LOGGING">
+          <Key>
+            <PropertyRef Name="logdate" />
+          </Key>
+          <Property Name="logdate" Type="datetime" Nullable="false" />
+          <Property Name="page_id" Type="nvarchar" MaxLength="8" />
+          <Property Name="emp_no" Type="nvarchar" MaxLength="10" />
+          <Property Name="ip_address" Type="nvarchar" MaxLength="20" />
+          <Property Name="command" Type="nvarchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="USER_MASTER">
+          <Key>
+            <PropertyRef Name="emp_no" />
+          </Key>
+          <Property Name="emp_no" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="20" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="office_tel" Type="nvarchar" MaxLength="20" />
+          <Property Name="mobile_tel" Type="nvarchar" MaxLength="20" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="join_date" Type="date" />
+          <Property Name="birth_date" Type="date" />
+          <Property Name="photo" Type="image" />
+          <Property Name="department_id" Type="int" />
+          <Property Name="buyer_division" Type="nvarchar" MaxLength="20" />
+          <Property Name="district_code" Type="varchar" MaxLength="4" />
+          <Property Name="cdate" Type="datetime" />
+          <Property Name="cuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="udate" Type="datetime" />
+          <Property Name="uuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="program_id" Type="nvarchar" MaxLength="20" />
+          <Property Name="sub_department" Type="int" />
+        </EntityType>
+        <EntityType Name="USER_PWD">
+          <Key>
+            <PropertyRef Name="emp_no" />
+          </Key>
+          <Property Name="emp_no" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="valid_from" Type="date" />
+          <Property Name="valid_to" Type="date" />
+          <Property Name="failed_attempts" Type="int" />
+          <Property Name="status" Type="nchar" MaxLength="1" />
+          <Property Name="last_logon" Type="datetime" />
+          <Property Name="last_logon_ip" Type="varchar" MaxLength="20" />
+          <Property Name="last_pwd_change" Type="date" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" />
+          <Property Name="pass_code" Type="nvarchar" MaxLength="100" />
+          <Property Name="cdate" Type="datetime" />
+          <Property Name="cuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="udate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VersionPos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaSubida" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AggregatedCounter">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="bigint" Nullable="false" />
+          <Property Name="ExpireAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Counter">
+          <Key>
+            <PropertyRef Name="Key" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+          <Property Name="ExpireAt" Type="datetime" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hash">
+          <Key>
+            <PropertyRef Name="Key" />
+            <PropertyRef Name="Field" />
+          </Key>
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Field" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="ExpireAt" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateId" Type="bigint" />
+          <Property Name="StateName" Type="nvarchar" MaxLength="20" />
+          <Property Name="InvocationData" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Arguments" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ExpireAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobParameter">
+          <Key>
+            <PropertyRef Name="JobId" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="JobId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="JobQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Queue" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobId" Type="bigint" Nullable="false" />
+          <Property Name="Queue" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FetchedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="ExpireAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Schema">
+          <Key>
+            <PropertyRef Name="Version" />
+          </Key>
+          <Property Name="Version" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Server">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" />
+          <Property Name="LastHeartbeat" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Set">
+          <Key>
+            <PropertyRef Name="Key" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Score" Type="float" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ExpireAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__DFLPOS_DI__site___4E53A1AA">
+          <End Role="DFLPOS_SITES" Type="Self.DFLPOS_SITES" Multiplicity="0..1" />
+          <End Role="DFLPOS_DISTRIBUTION" Type="Self.DFLPOS_DISTRIBUTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DFLPOS_SITES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DFLPOS_DISTRIBUTION">
+              <PropertyRef Name="site_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DFLPOS_DI__versi__4D5F7D71">
+          <End Role="DFLPOS_VERSIONS" Type="Self.DFLPOS_VERSIONS" Multiplicity="0..1" />
+          <End Role="DFLPOS_DISTRIBUTION" Type="Self.DFLPOS_DISTRIBUTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DFLPOS_VERSIONS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DFLPOS_DISTRIBUTION">
+              <PropertyRef Name="version_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PosVersio__Versi__4D94879B">
+          <End Role="PosVersions" Type="Self.PosVersions" Multiplicity="1" />
+          <End Role="PosVersionFiles" Type="Self.PosVersionFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosVersions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosVersionFiles">
+              <PropertyRef Name="VersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UpdateJob__JobId__5629CD9C">
+          <End Role="UpdateJobs" Type="Self.UpdateJobs" Multiplicity="1" />
+          <End Role="UpdateJobTargets" Type="Self.UpdateJobTargets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateJobs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UpdateJobTargets">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UpdateJob__Versi__5165187F">
+          <End Role="PosVersions" Type="Self.PosVersions" Multiplicity="1" />
+          <End Role="UpdateJobs" Type="Self.UpdateJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosVersions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UpdateJobs">
+              <PropertyRef Name="VersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UpdateLog__Targe__5AEE82B9">
+          <End Role="UpdateJobTargets" Type="Self.UpdateJobTargets" Multiplicity="1" />
+          <End Role="UpdateLogs" Type="Self.UpdateLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateJobTargets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UpdateLogs">
+              <PropertyRef Name="TargetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HangFire_JobParameter_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HangFire_State_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_ROLE_PAGE_SYS_PAGE_MASTER">
+          <End Role="SYS_PAGE_MASTER" Type="Self.SYS_PAGE_MASTER" Multiplicity="1" />
+          <End Role="SYS_ROLE_PAGE" Type="Self.SYS_ROLE_PAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_PAGE_MASTER">
+              <PropertyRef Name="page_id" />
+            </Principal>
+            <Dependent Role="SYS_ROLE_PAGE">
+              <PropertyRef Name="page_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_ROLE_PAGE_SYS_ROLE_PAGE">
+          <End Role="SYS_ROLE_MASTER" Type="Self.SYS_ROLE_MASTER" Multiplicity="1" />
+          <End Role="SYS_ROLE_PAGE" Type="Self.SYS_ROLE_PAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_ROLE_MASTER">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="SYS_ROLE_PAGE">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_ROLE_USER_SYS_ROLE_MASTER">
+          <End Role="SYS_ROLE_MASTER" Type="Self.SYS_ROLE_MASTER" Multiplicity="1" />
+          <End Role="SYS_ROLE_USER" Type="Self.SYS_ROLE_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_ROLE_MASTER">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="SYS_ROLE_USER">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_ROLE_USER_USER_MASTER">
+          <End Role="USER_MASTER" Type="Self.USER_MASTER" Multiplicity="1" />
+          <End Role="SYS_ROLE_USER" Type="Self.SYS_ROLE_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MASTER">
+              <PropertyRef Name="emp_no" />
+            </Principal>
+            <Dependent Role="SYS_ROLE_USER">
+              <PropertyRef Name="emp_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_MASTER_USER_PWD">
+          <End Role="USER_PWD" Type="Self.USER_PWD" Multiplicity="1" />
+          <End Role="USER_MASTER" Type="Self.USER_MASTER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="USER_PWD">
+              <PropertyRef Name="emp_no" />
+            </Principal>
+            <Dependent Role="USER_MASTER">
+              <PropertyRef Name="emp_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DFLPOS_UPDATERModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DFLPOS_DISTRIBUTION" EntityType="Self.DFLPOS_DISTRIBUTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DFLPOS_SITES" EntityType="Self.DFLPOS_SITES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DFLPOS_VERSIONS" EntityType="Self.DFLPOS_VERSIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistorialDistribucion" EntityType="Self.HistorialDistribucion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosVersionFiles" EntityType="Self.PosVersionFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosVersions" EntityType="Self.PosVersions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SITE_CONFIG" EntityType="Self.SITE_CONFIG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteHealthChecks" EntityType="Self.SiteHealthChecks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sucursales" EntityType="Self.Sucursales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_LOG" EntityType="Self.SYS_LOG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_LOG_CONNECTION" EntityType="Self.SYS_LOG_CONNECTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_PAGE_MASTER" EntityType="Self.SYS_PAGE_MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_ROLE_MASTER" EntityType="Self.SYS_ROLE_MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_ROLE_PAGE" EntityType="Self.SYS_ROLE_PAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_ROLE_USER" EntityType="Self.SYS_ROLE_USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UpdateJobs" EntityType="Self.UpdateJobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UpdateJobTargets" EntityType="Self.UpdateJobTargets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UpdateLogs" EntityType="Self.UpdateLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_LOGGING" EntityType="Self.USER_LOGGING" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_MASTER" EntityType="Self.USER_MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_PWD" EntityType="Self.USER_PWD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VersionPos" EntityType="Self.VersionPos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AggregatedCounter" EntityType="Self.AggregatedCounter" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Counter" EntityType="Self.Counter" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Hash" EntityType="Self.Hash" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="JobParameter" EntityType="Self.JobParameter" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="JobQueue" EntityType="Self.JobQueue" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="List" EntityType="Self.List" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Schema" EntityType="Self.Schema" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Server" EntityType="Self.Server" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Set" EntityType="Self.Set" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="SitesConfig" EntityType="Self.SitesConfig" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SitesConfig].[Id] AS [Id], 
+    [SitesConfig].[Name] AS [Name], 
+    [SitesConfig].[FtpHost] AS [FtpHost], 
+    [SitesConfig].[FtpUser] AS [FtpUser], 
+    [SitesConfig].[FtpPassEnc] AS [FtpPassEnc], 
+    [SitesConfig].[DestPath] AS [DestPath], 
+    [SitesConfig].[Active] AS [Active]
+    FROM [dbo].[SitesConfig] AS [SitesConfig]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__DFLPOS_DI__site___4E53A1AA" Association="Self.FK__DFLPOS_DI__site___4E53A1AA">
+            <End Role="DFLPOS_SITES" EntitySet="DFLPOS_SITES" />
+            <End Role="DFLPOS_DISTRIBUTION" EntitySet="DFLPOS_DISTRIBUTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DFLPOS_DI__versi__4D5F7D71" Association="Self.FK__DFLPOS_DI__versi__4D5F7D71">
+            <End Role="DFLPOS_VERSIONS" EntitySet="DFLPOS_VERSIONS" />
+            <End Role="DFLPOS_DISTRIBUTION" EntitySet="DFLPOS_DISTRIBUTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PosVersio__Versi__4D94879B" Association="Self.FK__PosVersio__Versi__4D94879B">
+            <End Role="PosVersions" EntitySet="PosVersions" />
+            <End Role="PosVersionFiles" EntitySet="PosVersionFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UpdateJob__JobId__5629CD9C" Association="Self.FK__UpdateJob__JobId__5629CD9C">
+            <End Role="UpdateJobs" EntitySet="UpdateJobs" />
+            <End Role="UpdateJobTargets" EntitySet="UpdateJobTargets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UpdateJob__Versi__5165187F" Association="Self.FK__UpdateJob__Versi__5165187F">
+            <End Role="PosVersions" EntitySet="PosVersions" />
+            <End Role="UpdateJobs" EntitySet="UpdateJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UpdateLog__Targe__5AEE82B9" Association="Self.FK__UpdateLog__Targe__5AEE82B9">
+            <End Role="UpdateJobTargets" EntitySet="UpdateJobTargets" />
+            <End Role="UpdateLogs" EntitySet="UpdateLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HangFire_JobParameter_Job" Association="Self.FK_HangFire_JobParameter_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HangFire_State_Job" Association="Self.FK_HangFire_State_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_ROLE_PAGE_SYS_PAGE_MASTER" Association="Self.FK_SYS_ROLE_PAGE_SYS_PAGE_MASTER">
+            <End Role="SYS_PAGE_MASTER" EntitySet="SYS_PAGE_MASTER" />
+            <End Role="SYS_ROLE_PAGE" EntitySet="SYS_ROLE_PAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_ROLE_PAGE_SYS_ROLE_PAGE" Association="Self.FK_SYS_ROLE_PAGE_SYS_ROLE_PAGE">
+            <End Role="SYS_ROLE_MASTER" EntitySet="SYS_ROLE_MASTER" />
+            <End Role="SYS_ROLE_PAGE" EntitySet="SYS_ROLE_PAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_ROLE_USER_SYS_ROLE_MASTER" Association="Self.FK_SYS_ROLE_USER_SYS_ROLE_MASTER">
+            <End Role="SYS_ROLE_MASTER" EntitySet="SYS_ROLE_MASTER" />
+            <End Role="SYS_ROLE_USER" EntitySet="SYS_ROLE_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_ROLE_USER_USER_MASTER" Association="Self.FK_SYS_ROLE_USER_USER_MASTER">
+            <End Role="USER_MASTER" EntitySet="USER_MASTER" />
+            <End Role="SYS_ROLE_USER" EntitySet="SYS_ROLE_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_MASTER_USER_PWD" Association="Self.FK_USER_MASTER_USER_PWD">
+            <End Role="USER_PWD" EntitySet="USER_PWD" />
+            <End Role="USER_MASTER" EntitySet="USER_MASTER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DFLPOS_UPDATERModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="HistorialDistribucion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sucursal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaEnvio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Exitoso" Type="Boolean" Nullable="false" />
+          <Property Name="Resultado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PosVersionFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VersionId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="260" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileSizeBytes" Type="Int64" Nullable="false" />
+          <Property Name="FileHashSha256" Type="Binary" MaxLength="32" FixedLength="false" Nullable="false" />
+          <Property Name="StoragePath" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsRequired" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PosVersions" Relationship="Self.FK__PosVersio__Versi__4D94879B" FromRole="PosVersionFiles" ToRole="PosVersions" />
+        </EntityType>
+        <EntityType Name="PosVersions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VersionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChangeLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsDraft" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PosVersionFiles" Relationship="Self.FK__PosVersio__Versi__4D94879B" FromRole="PosVersions" ToRole="PosVersionFiles" />
+          <NavigationProperty Name="UpdateJobs" Relationship="Self.FK__UpdateJob__Versi__5165187F" FromRole="PosVersions" ToRole="UpdateJobs" />
+        </EntityType>
+        <EntityType Name="SiteHealthChecks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteId" Type="Int32" Nullable="false" />
+          <Property Name="CheckedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="RemotePath" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="260" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExistsFlag" Type="Boolean" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sucursales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IpServidor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RutaBase" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SYS_LOG">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idAfect" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Reference" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="uuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="time" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Menu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cdate" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Program_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SYS_PAGE_MASTER">
+          <Key>
+            <PropertyRef Name="page_id" />
+          </Key>
+          <Property Name="page_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="page_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="active_flag" Type="Boolean" />
+          <Property Name="level_1_menu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="level_2_menu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="level_3_menu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="menu_sequence" Type="Int32" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <Property Name="cuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="udate" Type="DateTime" Precision="3" />
+          <Property Name="uuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="program_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SYS_ROLE_PAGE" Relationship="Self.FK_SYS_ROLE_PAGE_SYS_PAGE_MASTER" FromRole="SYS_PAGE_MASTER" ToRole="SYS_ROLE_PAGE" />
+        </EntityType>
+        <EntityType Name="SYS_ROLE_MASTER">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="role_description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="active_flag" Type="Boolean" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <Property Name="cuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="udate" Type="DateTime" Precision="3" />
+          <Property Name="uuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SYS_ROLE_PAGE" Relationship="Self.FK_SYS_ROLE_PAGE_SYS_ROLE_PAGE" FromRole="SYS_ROLE_MASTER" ToRole="SYS_ROLE_PAGE" />
+          <NavigationProperty Name="SYS_ROLE_USER" Relationship="Self.FK_SYS_ROLE_USER_SYS_ROLE_MASTER" FromRole="SYS_ROLE_MASTER" ToRole="SYS_ROLE_USER" />
+        </EntityType>
+        <EntityType Name="SYS_ROLE_PAGE">
+          <Key>
+            <PropertyRef Name="page_id" />
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="page_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role_id" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <Property Name="cuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="udate" Type="DateTime" Precision="3" />
+          <Property Name="uuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="program_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SYS_PAGE_MASTER" Relationship="Self.FK_SYS_ROLE_PAGE_SYS_PAGE_MASTER" FromRole="SYS_ROLE_PAGE" ToRole="SYS_PAGE_MASTER" />
+          <NavigationProperty Name="SYS_ROLE_MASTER" Relationship="Self.FK_SYS_ROLE_PAGE_SYS_ROLE_PAGE" FromRole="SYS_ROLE_PAGE" ToRole="SYS_ROLE_MASTER" />
+        </EntityType>
+        <EntityType Name="SYS_ROLE_USER">
+          <Key>
+            <PropertyRef Name="role_id" />
+            <PropertyRef Name="emp_no" />
+          </Key>
+          <Property Name="role_id" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emp_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <Property Name="cuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="udate" Type="DateTime" Precision="3" />
+          <Property Name="uuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="program_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SYS_ROLE_MASTER" Relationship="Self.FK_SYS_ROLE_USER_SYS_ROLE_MASTER" FromRole="SYS_ROLE_USER" ToRole="SYS_ROLE_MASTER" />
+          <NavigationProperty Name="USER_MASTER" Relationship="Self.FK_SYS_ROLE_USER_USER_MASTER" FromRole="SYS_ROLE_USER" ToRole="USER_MASTER" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UpdateJobs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VersionId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ScheduledAt" Type="DateTime" Precision="7" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="PosVersions" Relationship="Self.FK__UpdateJob__Versi__5165187F" FromRole="UpdateJobs" ToRole="PosVersions" />
+          <NavigationProperty Name="UpdateJobTargets" Relationship="Self.FK__UpdateJob__JobId__5629CD9C" FromRole="UpdateJobs" ToRole="UpdateJobTargets" />
+        </EntityType>
+        <EntityType Name="UpdateJobTargets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="SiteId" Type="Int32" Nullable="false" />
+          <Property Name="TargetPath" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FtpHost" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FtpUser" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FtpPassEnc" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="LastMessage" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="StartedAt" Type="DateTime" Precision="7" />
+          <Property Name="EndedAt" Type="DateTime" Precision="7" />
+          <Property Name="BackupPath" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="RemoteVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UpdateJobs" Relationship="Self.FK__UpdateJob__JobId__5629CD9C" FromRole="UpdateJobTargets" ToRole="UpdateJobs" />
+          <NavigationProperty Name="UpdateLogs" Relationship="Self.FK__UpdateLog__Targe__5AEE82B9" FromRole="UpdateJobTargets" ToRole="UpdateLogs" />
+        </EntityType>
+        <EntityType Name="UpdateLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TargetId" Type="Int64" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Level" Type="Byte" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UpdateJobTargets" Relationship="Self.FK__UpdateLog__Targe__5AEE82B9" FromRole="UpdateLogs" ToRole="UpdateJobTargets" />
+        </EntityType>
+        <EntityType Name="USER_LOGGING">
+          <Key>
+            <PropertyRef Name="logdate" />
+          </Key>
+          <Property Name="logdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="page_id" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="emp_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ip_address" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="command" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="USER_MASTER">
+          <Key>
+            <PropertyRef Name="emp_no" />
+          </Key>
+          <Property Name="emp_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="office_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="mobile_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="join_date" Type="DateTime" Precision="0" />
+          <Property Name="birth_date" Type="DateTime" Precision="0" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="department_id" Type="Int32" />
+          <Property Name="buyer_division" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="district_code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <Property Name="cuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="udate" Type="DateTime" Precision="3" />
+          <Property Name="uuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="program_id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="sub_department" Type="Int32" />
+          <NavigationProperty Name="SYS_ROLE_USER" Relationship="Self.FK_SYS_ROLE_USER_USER_MASTER" FromRole="USER_MASTER" ToRole="SYS_ROLE_USER" />
+          <NavigationProperty Name="USER_PWD" Relationship="Self.FK_USER_MASTER_USER_PWD" FromRole="USER_MASTER" ToRole="USER_PWD" />
+        </EntityType>
+        <EntityType Name="USER_PWD">
+          <Key>
+            <PropertyRef Name="emp_no" />
+          </Key>
+          <Property Name="emp_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="valid_from" Type="DateTime" Precision="0" />
+          <Property Name="valid_to" Type="DateTime" Precision="0" />
+          <Property Name="failed_attempts" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="last_logon" Type="DateTime" Precision="3" />
+          <Property Name="last_logon_ip" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="last_pwd_change" Type="DateTime" Precision="0" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="pass_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <Property Name="cuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="udate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="USER_MASTER" Relationship="Self.FK_USER_MASTER_USER_PWD" FromRole="USER_PWD" ToRole="USER_MASTER" />
+        </EntityType>
+        <EntityType Name="VersionPos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaSubida" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="AggregatedCounter">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="Int64" Nullable="false" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Counter">
+          <Key>
+            <PropertyRef Name="Key" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Hash">
+          <Key>
+            <PropertyRef Name="Key" />
+            <PropertyRef Name="Field" />
+          </Key>
+          <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Field" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateId" Type="Int64" />
+          <Property Name="StateName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="InvocationData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Arguments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="JobParameter" Relationship="Self.FK_HangFire_JobParameter_Job" FromRole="Job" ToRole="JobParameter" />
+          <NavigationProperty Name="State" Relationship="Self.FK_HangFire_State_Job" FromRole="Job" ToRole="State" />
+        </EntityType>
+        <EntityType Name="JobParameter">
+          <Key>
+            <PropertyRef Name="JobId" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="JobId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_HangFire_JobParameter_Job" FromRole="JobParameter" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="JobQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Queue" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobId" Type="Int64" Nullable="false" />
+          <Property Name="Queue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FetchedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Schema">
+          <Key>
+            <PropertyRef Name="Version" />
+          </Key>
+          <Property Name="Version" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Server">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastHeartbeat" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Set">
+          <Key>
+            <PropertyRef Name="Key" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Score" Type="Double" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_HangFire_State_Job" FromRole="State" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="SitesConfig">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FtpHost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FtpUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FtpPassEnc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PosVersio__Versi__4D94879B">
+          <End Role="PosVersions" Type="Self.PosVersions" Multiplicity="1" />
+          <End Role="PosVersionFiles" Type="Self.PosVersionFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosVersions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosVersionFiles">
+              <PropertyRef Name="VersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UpdateJob__Versi__5165187F">
+          <End Role="PosVersions" Type="Self.PosVersions" Multiplicity="1" />
+          <End Role="UpdateJobs" Type="Self.UpdateJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosVersions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UpdateJobs">
+              <PropertyRef Name="VersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_ROLE_PAGE_SYS_PAGE_MASTER">
+          <End Role="SYS_PAGE_MASTER" Type="Self.SYS_PAGE_MASTER" Multiplicity="1" />
+          <End Role="SYS_ROLE_PAGE" Type="Self.SYS_ROLE_PAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_PAGE_MASTER">
+              <PropertyRef Name="page_id" />
+            </Principal>
+            <Dependent Role="SYS_ROLE_PAGE">
+              <PropertyRef Name="page_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_ROLE_PAGE_SYS_ROLE_PAGE">
+          <End Role="SYS_ROLE_MASTER" Type="Self.SYS_ROLE_MASTER" Multiplicity="1" />
+          <End Role="SYS_ROLE_PAGE" Type="Self.SYS_ROLE_PAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_ROLE_MASTER">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="SYS_ROLE_PAGE">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_ROLE_USER_SYS_ROLE_MASTER">
+          <End Role="SYS_ROLE_MASTER" Type="Self.SYS_ROLE_MASTER" Multiplicity="1" />
+          <End Role="SYS_ROLE_USER" Type="Self.SYS_ROLE_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_ROLE_MASTER">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="SYS_ROLE_USER">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_ROLE_USER_USER_MASTER">
+          <End Role="USER_MASTER" Type="Self.USER_MASTER" Multiplicity="1" />
+          <End Role="SYS_ROLE_USER" Type="Self.SYS_ROLE_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MASTER">
+              <PropertyRef Name="emp_no" />
+            </Principal>
+            <Dependent Role="SYS_ROLE_USER">
+              <PropertyRef Name="emp_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UpdateJob__JobId__5629CD9C">
+          <End Role="UpdateJobs" Type="Self.UpdateJobs" Multiplicity="1" />
+          <End Role="UpdateJobTargets" Type="Self.UpdateJobTargets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateJobs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UpdateJobTargets">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UpdateLog__Targe__5AEE82B9">
+          <End Role="UpdateJobTargets" Type="Self.UpdateJobTargets" Multiplicity="1" />
+          <End Role="UpdateLogs" Type="Self.UpdateLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateJobTargets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UpdateLogs">
+              <PropertyRef Name="TargetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_MASTER_USER_PWD">
+          <End Role="USER_PWD" Type="Self.USER_PWD" Multiplicity="1" />
+          <End Role="USER_MASTER" Type="Self.USER_MASTER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="USER_PWD">
+              <PropertyRef Name="emp_no" />
+            </Principal>
+            <Dependent Role="USER_MASTER">
+              <PropertyRef Name="emp_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HangFire_JobParameter_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HangFire_State_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DFLPOS_UPDATEREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="HistorialDistribucion" EntityType="Self.HistorialDistribucion" />
+          <EntitySet Name="PosVersionFiles" EntityType="Self.PosVersionFiles" />
+          <EntitySet Name="PosVersions" EntityType="Self.PosVersions" />
+          <EntitySet Name="SiteHealthChecks" EntityType="Self.SiteHealthChecks" />
+          <EntitySet Name="Sucursales" EntityType="Self.Sucursales" />
+          <EntitySet Name="SYS_LOG" EntityType="Self.SYS_LOG" />
+          <EntitySet Name="SYS_PAGE_MASTER" EntityType="Self.SYS_PAGE_MASTER" />
+          <EntitySet Name="SYS_ROLE_MASTER" EntityType="Self.SYS_ROLE_MASTER" />
+          <EntitySet Name="SYS_ROLE_PAGE" EntityType="Self.SYS_ROLE_PAGE" />
+          <EntitySet Name="SYS_ROLE_USER" EntityType="Self.SYS_ROLE_USER" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UpdateJobs" EntityType="Self.UpdateJobs" />
+          <EntitySet Name="UpdateJobTargets" EntityType="Self.UpdateJobTargets" />
+          <EntitySet Name="UpdateLogs" EntityType="Self.UpdateLogs" />
+          <EntitySet Name="USER_LOGGING" EntityType="Self.USER_LOGGING" />
+          <EntitySet Name="USER_MASTER" EntityType="Self.USER_MASTER" />
+          <EntitySet Name="USER_PWD" EntityType="Self.USER_PWD" />
+          <EntitySet Name="VersionPos" EntityType="Self.VersionPos" />
+          <EntitySet Name="AggregatedCounter" EntityType="Self.AggregatedCounter" />
+          <EntitySet Name="Counter" EntityType="Self.Counter" />
+          <EntitySet Name="Hash" EntityType="Self.Hash" />
+          <EntitySet Name="Job" EntityType="Self.Job" />
+          <EntitySet Name="JobParameter" EntityType="Self.JobParameter" />
+          <EntitySet Name="JobQueue" EntityType="Self.JobQueue" />
+          <EntitySet Name="List" EntityType="Self.List" />
+          <EntitySet Name="Schema" EntityType="Self.Schema" />
+          <EntitySet Name="Server" EntityType="Self.Server" />
+          <EntitySet Name="Set" EntityType="Self.Set" />
+          <EntitySet Name="State" EntityType="Self.State" />
+          <EntitySet Name="SitesConfig" EntityType="Self.SitesConfig" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PosVersio__Versi__4D94879B" Association="Self.FK__PosVersio__Versi__4D94879B">
+            <End Role="PosVersions" EntitySet="PosVersions" />
+            <End Role="PosVersionFiles" EntitySet="PosVersionFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UpdateJob__Versi__5165187F" Association="Self.FK__UpdateJob__Versi__5165187F">
+            <End Role="PosVersions" EntitySet="PosVersions" />
+            <End Role="UpdateJobs" EntitySet="UpdateJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_ROLE_PAGE_SYS_PAGE_MASTER" Association="Self.FK_SYS_ROLE_PAGE_SYS_PAGE_MASTER">
+            <End Role="SYS_PAGE_MASTER" EntitySet="SYS_PAGE_MASTER" />
+            <End Role="SYS_ROLE_PAGE" EntitySet="SYS_ROLE_PAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_ROLE_PAGE_SYS_ROLE_PAGE" Association="Self.FK_SYS_ROLE_PAGE_SYS_ROLE_PAGE">
+            <End Role="SYS_ROLE_MASTER" EntitySet="SYS_ROLE_MASTER" />
+            <End Role="SYS_ROLE_PAGE" EntitySet="SYS_ROLE_PAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_ROLE_USER_SYS_ROLE_MASTER" Association="Self.FK_SYS_ROLE_USER_SYS_ROLE_MASTER">
+            <End Role="SYS_ROLE_MASTER" EntitySet="SYS_ROLE_MASTER" />
+            <End Role="SYS_ROLE_USER" EntitySet="SYS_ROLE_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_ROLE_USER_USER_MASTER" Association="Self.FK_SYS_ROLE_USER_USER_MASTER">
+            <End Role="USER_MASTER" EntitySet="USER_MASTER" />
+            <End Role="SYS_ROLE_USER" EntitySet="SYS_ROLE_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UpdateJob__JobId__5629CD9C" Association="Self.FK__UpdateJob__JobId__5629CD9C">
+            <End Role="UpdateJobs" EntitySet="UpdateJobs" />
+            <End Role="UpdateJobTargets" EntitySet="UpdateJobTargets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UpdateLog__Targe__5AEE82B9" Association="Self.FK__UpdateLog__Targe__5AEE82B9">
+            <End Role="UpdateJobTargets" EntitySet="UpdateJobTargets" />
+            <End Role="UpdateLogs" EntitySet="UpdateLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_MASTER_USER_PWD" Association="Self.FK_USER_MASTER_USER_PWD">
+            <End Role="USER_PWD" EntitySet="USER_PWD" />
+            <End Role="USER_MASTER" EntitySet="USER_MASTER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HangFire_JobParameter_Job" Association="Self.FK_HangFire_JobParameter_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HangFire_State_Job" Association="Self.FK_HangFire_State_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="SYS_LOG_CONNECTION" EntityType="DFLPOS_UPDATERModel.SYS_LOG_CONNECTION" />
+          <EntitySet Name="SITE_CONFIG" EntityType="DFLPOS_UPDATERModel.SITE_CONFIG" />
+          <EntitySet Name="DFLPOS_DISTRIBUTION" EntityType="DFLPOS_UPDATERModel.DFLPOS_DISTRIBUTION" />
+          <EntitySet Name="DFLPOS_SITES" EntityType="DFLPOS_UPDATERModel.DFLPOS_SITES" />
+          <EntitySet Name="DFLPOS_VERSIONS" EntityType="DFLPOS_UPDATERModel.DFLPOS_VERSIONS" />
+          <AssociationSet Name="FK__DFLPOS_DI__site___4E53A1AA" Association="DFLPOS_UPDATERModel.FK__DFLPOS_DI__site___4E53A1AA">
+            <End Role="DFLPOS_SITES" EntitySet="DFLPOS_SITES" />
+            <End Role="DFLPOS_DISTRIBUTION" EntitySet="DFLPOS_DISTRIBUTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DFLPOS_DI__versi__4D5F7D71" Association="DFLPOS_UPDATERModel.FK__DFLPOS_DI__versi__4D5F7D71">
+            <End Role="DFLPOS_VERSIONS" EntitySet="DFLPOS_VERSIONS" />
+            <End Role="DFLPOS_DISTRIBUTION" EntitySet="DFLPOS_DISTRIBUTION" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SYS_LOG_CONNECTION">
+          <Key>
+            <PropertyRef Name="conn_code" />
+          </Key>
+          <Property Name="conn_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_no" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="connlog_date" Type="DateTime" Precision="3" />
+          <Property Name="connlogout_date" Type="DateTime" Precision="3" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <Property Name="conn_status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="SITE_CONFIG">
+          <Key>
+            <PropertyRef Name="site_code" />
+          </Key>
+          <Property Name="site_code" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="site_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="site_irs_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="site_rfc" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="tax_regime" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="site_state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="site_city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="site_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="site_zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="site_user_server" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="site_user_pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="desk_app_con" Type="Binary" MaxLength="300" FixedLength="false" />
+          <Property Name="movil_app_con" Type="Binary" MaxLength="300" FixedLength="false" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <Property Name="cuser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="udate" Type="DateTime" Precision="3" />
+          <Property Name="uuser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="program_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DFLPOS_DISTRIBUTION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version_id" Type="Int32" />
+          <Property Name="site_id" Type="Int32" />
+          <Property Name="estate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="cdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DFLPOS_SITES" Relationship="DFLPOS_UPDATERModel.FK__DFLPOS_DI__site___4E53A1AA" FromRole="DFLPOS_DISTRIBUTION" ToRole="DFLPOS_SITES" />
+          <NavigationProperty Name="DFLPOS_VERSIONS" Relationship="DFLPOS_UPDATERModel.FK__DFLPOS_DI__versi__4D5F7D71" FromRole="DFLPOS_DISTRIBUTION" ToRole="DFLPOS_VERSIONS" />
+        </EntityType>
+        <EntityType Name="DFLPOS_SITES">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ip" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ftp_user" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ftp_password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="destination_route" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DFLPOS_DISTRIBUTION" Relationship="DFLPOS_UPDATERModel.FK__DFLPOS_DI__site___4E53A1AA" FromRole="DFLPOS_SITES" ToRole="DFLPOS_DISTRIBUTION" />
+        </EntityType>
+        <EntityType Name="DFLPOS_VERSIONS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="version" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="files" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="upload_date" Type="DateTime" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DFLPOS_DISTRIBUTION" Relationship="DFLPOS_UPDATERModel.FK__DFLPOS_DI__versi__4D5F7D71" FromRole="DFLPOS_VERSIONS" ToRole="DFLPOS_DISTRIBUTION" />
+        </EntityType>
+        <Association Name="FK__DFLPOS_DI__site___4E53A1AA">
+          <End Type="DFLPOS_UPDATERModel.DFLPOS_SITES" Role="DFLPOS_SITES" Multiplicity="0..1" />
+          <End Type="DFLPOS_UPDATERModel.DFLPOS_DISTRIBUTION" Role="DFLPOS_DISTRIBUTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DFLPOS_SITES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DFLPOS_DISTRIBUTION">
+              <PropertyRef Name="site_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DFLPOS_DI__versi__4D5F7D71">
+          <End Type="DFLPOS_UPDATERModel.DFLPOS_VERSIONS" Role="DFLPOS_VERSIONS" Multiplicity="0..1" />
+          <End Type="DFLPOS_UPDATERModel.DFLPOS_DISTRIBUTION" Role="DFLPOS_DISTRIBUTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DFLPOS_VERSIONS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DFLPOS_DISTRIBUTION">
+              <PropertyRef Name="version_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DFLPOS_UPDATERModelStoreContainer" CdmEntityContainer="DFLPOS_UPDATEREntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistorialDistribucion">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.HistorialDistribucion">
+              <MappingFragment StoreEntitySet="HistorialDistribucion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="FechaEnvio" ColumnName="FechaEnvio" />
+                <ScalarProperty Name="Exitoso" ColumnName="Exitoso" />
+                <ScalarProperty Name="Resultado" ColumnName="Resultado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PosVersionFiles">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.PosVersionFiles">
+              <MappingFragment StoreEntitySet="PosVersionFiles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VersionId" ColumnName="VersionId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileSizeBytes" ColumnName="FileSizeBytes" />
+                <ScalarProperty Name="FileHashSha256" ColumnName="FileHashSha256" />
+                <ScalarProperty Name="StoragePath" ColumnName="StoragePath" />
+                <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PosVersions">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.PosVersions">
+              <MappingFragment StoreEntitySet="PosVersions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VersionName" ColumnName="VersionName" />
+                <ScalarProperty Name="ChangeLog" ColumnName="ChangeLog" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="IsDraft" ColumnName="IsDraft" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteHealthChecks">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.SiteHealthChecks">
+              <MappingFragment StoreEntitySet="SiteHealthChecks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="CheckedAt" ColumnName="CheckedAt" />
+                <ScalarProperty Name="RemotePath" ColumnName="RemotePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ExistsFlag" ColumnName="ExistsFlag" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sucursales">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.Sucursales">
+              <MappingFragment StoreEntitySet="Sucursales">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IpServidor" ColumnName="IpServidor" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RutaBase" ColumnName="RutaBase" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_LOG">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.SYS_LOG">
+              <MappingFragment StoreEntitySet="SYS_LOG">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="idAfect" ColumnName="idAfect" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="uuser" ColumnName="uuser" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="Menu" ColumnName="Menu" />
+                <ScalarProperty Name="Cdate" ColumnName="Cdate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Program_id" ColumnName="Program_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_PAGE_MASTER">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.SYS_PAGE_MASTER">
+              <MappingFragment StoreEntitySet="SYS_PAGE_MASTER">
+                <ScalarProperty Name="page_id" ColumnName="page_id" />
+                <ScalarProperty Name="page_name" ColumnName="page_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="active_flag" ColumnName="active_flag" />
+                <ScalarProperty Name="level_1_menu" ColumnName="level_1_menu" />
+                <ScalarProperty Name="level_2_menu" ColumnName="level_2_menu" />
+                <ScalarProperty Name="level_3_menu" ColumnName="level_3_menu" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="menu_sequence" ColumnName="menu_sequence" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="cuser" ColumnName="cuser" />
+                <ScalarProperty Name="udate" ColumnName="udate" />
+                <ScalarProperty Name="uuser" ColumnName="uuser" />
+                <ScalarProperty Name="program_id" ColumnName="program_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_ROLE_MASTER">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.SYS_ROLE_MASTER">
+              <MappingFragment StoreEntitySet="SYS_ROLE_MASTER">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+                <ScalarProperty Name="role_description" ColumnName="role_description" />
+                <ScalarProperty Name="active_flag" ColumnName="active_flag" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="cuser" ColumnName="cuser" />
+                <ScalarProperty Name="udate" ColumnName="udate" />
+                <ScalarProperty Name="uuser" ColumnName="uuser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_ROLE_PAGE">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.SYS_ROLE_PAGE">
+              <MappingFragment StoreEntitySet="SYS_ROLE_PAGE">
+                <ScalarProperty Name="page_id" ColumnName="page_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="cuser" ColumnName="cuser" />
+                <ScalarProperty Name="udate" ColumnName="udate" />
+                <ScalarProperty Name="uuser" ColumnName="uuser" />
+                <ScalarProperty Name="program_id" ColumnName="program_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_ROLE_USER">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.SYS_ROLE_USER">
+              <MappingFragment StoreEntitySet="SYS_ROLE_USER">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="emp_no" ColumnName="emp_no" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="cuser" ColumnName="cuser" />
+                <ScalarProperty Name="udate" ColumnName="udate" />
+                <ScalarProperty Name="uuser" ColumnName="uuser" />
+                <ScalarProperty Name="program_id" ColumnName="program_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UpdateJobs">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.UpdateJobs">
+              <MappingFragment StoreEntitySet="UpdateJobs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VersionId" ColumnName="VersionId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ScheduledAt" ColumnName="ScheduledAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UpdateJobTargets">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.UpdateJobTargets">
+              <MappingFragment StoreEntitySet="UpdateJobTargets">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="TargetPath" ColumnName="TargetPath" />
+                <ScalarProperty Name="FtpHost" ColumnName="FtpHost" />
+                <ScalarProperty Name="FtpUser" ColumnName="FtpUser" />
+                <ScalarProperty Name="FtpPassEnc" ColumnName="FtpPassEnc" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastMessage" ColumnName="LastMessage" />
+                <ScalarProperty Name="StartedAt" ColumnName="StartedAt" />
+                <ScalarProperty Name="EndedAt" ColumnName="EndedAt" />
+                <ScalarProperty Name="BackupPath" ColumnName="BackupPath" />
+                <ScalarProperty Name="RemoteVersion" ColumnName="RemoteVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UpdateLogs">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.UpdateLogs">
+              <MappingFragment StoreEntitySet="UpdateLogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_LOGGING">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.USER_LOGGING">
+              <MappingFragment StoreEntitySet="USER_LOGGING">
+                <ScalarProperty Name="logdate" ColumnName="logdate" />
+                <ScalarProperty Name="page_id" ColumnName="page_id" />
+                <ScalarProperty Name="emp_no" ColumnName="emp_no" />
+                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+                <ScalarProperty Name="command" ColumnName="command" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_MASTER">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.USER_MASTER">
+              <MappingFragment StoreEntitySet="USER_MASTER">
+                <ScalarProperty Name="emp_no" ColumnName="emp_no" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="office_tel" ColumnName="office_tel" />
+                <ScalarProperty Name="mobile_tel" ColumnName="mobile_tel" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="join_date" ColumnName="join_date" />
+                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="buyer_division" ColumnName="buyer_division" />
+                <ScalarProperty Name="district_code" ColumnName="district_code" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="cuser" ColumnName="cuser" />
+                <ScalarProperty Name="udate" ColumnName="udate" />
+                <ScalarProperty Name="uuser" ColumnName="uuser" />
+                <ScalarProperty Name="program_id" ColumnName="program_id" />
+                <ScalarProperty Name="sub_department" ColumnName="sub_department" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_PWD">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.USER_PWD">
+              <MappingFragment StoreEntitySet="USER_PWD">
+                <ScalarProperty Name="emp_no" ColumnName="emp_no" />
+                <ScalarProperty Name="valid_from" ColumnName="valid_from" />
+                <ScalarProperty Name="valid_to" ColumnName="valid_to" />
+                <ScalarProperty Name="failed_attempts" ColumnName="failed_attempts" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="last_logon" ColumnName="last_logon" />
+                <ScalarProperty Name="last_logon_ip" ColumnName="last_logon_ip" />
+                <ScalarProperty Name="last_pwd_change" ColumnName="last_pwd_change" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="pass_code" ColumnName="pass_code" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="cuser" ColumnName="cuser" />
+                <ScalarProperty Name="udate" ColumnName="udate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VersionPos">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.VersionPos">
+              <MappingFragment StoreEntitySet="VersionPos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="FechaSubida" ColumnName="FechaSubida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AggregatedCounter">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.AggregatedCounter">
+              <MappingFragment StoreEntitySet="AggregatedCounter">
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Counter">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.Counter">
+              <MappingFragment StoreEntitySet="Counter">
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hash">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.Hash">
+              <MappingFragment StoreEntitySet="Hash">
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Field" ColumnName="Field" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Job">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="InvocationData" ColumnName="InvocationData" />
+                <ScalarProperty Name="Arguments" ColumnName="Arguments" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobParameter">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.JobParameter">
+              <MappingFragment StoreEntitySet="JobParameter">
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobQueue">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.JobQueue">
+              <MappingFragment StoreEntitySet="JobQueue">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="Queue" ColumnName="Queue" />
+                <ScalarProperty Name="FetchedAt" ColumnName="FetchedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="List">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.List">
+              <MappingFragment StoreEntitySet="List">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schema">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.Schema">
+              <MappingFragment StoreEntitySet="Schema">
+                <ScalarProperty Name="Version" ColumnName="Version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Server">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.Server">
+              <MappingFragment StoreEntitySet="Server">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="LastHeartbeat" ColumnName="LastHeartbeat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Set">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.Set">
+              <MappingFragment StoreEntitySet="Set">
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="State">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SitesConfig">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.SitesConfig">
+              <MappingFragment StoreEntitySet="SitesConfig">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FtpHost" ColumnName="FtpHost" />
+                <ScalarProperty Name="FtpUser" ColumnName="FtpUser" />
+                <ScalarProperty Name="FtpPassEnc" ColumnName="FtpPassEnc" />
+                <ScalarProperty Name="DestPath" ColumnName="DestPath" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DFLPOS_UPDATERModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="SYS_LOG_CONNECTION">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.SYS_LOG_CONNECTION">
+              <MappingFragment StoreEntitySet="SYS_LOG_CONNECTION">
+                <ScalarProperty Name="conn_status" ColumnName="conn_status" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="connlogout_date" ColumnName="connlogout_date" />
+                <ScalarProperty Name="connlog_date" ColumnName="connlog_date" />
+                <ScalarProperty Name="emp_no" ColumnName="emp_no" />
+                <ScalarProperty Name="conn_code" ColumnName="conn_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SITE_CONFIG">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.SITE_CONFIG">
+              <MappingFragment StoreEntitySet="SITE_CONFIG">
+                <ScalarProperty Name="program_id" ColumnName="program_id" />
+                <ScalarProperty Name="uuser" ColumnName="uuser" />
+                <ScalarProperty Name="udate" ColumnName="udate" />
+                <ScalarProperty Name="cuser" ColumnName="cuser" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="movil_app_con" ColumnName="movil_app_con" />
+                <ScalarProperty Name="desk_app_con" ColumnName="desk_app_con" />
+                <ScalarProperty Name="site_user_pwd" ColumnName="site_user_pwd" />
+                <ScalarProperty Name="site_user_server" ColumnName="site_user_server" />
+                <ScalarProperty Name="site_zipcode" ColumnName="site_zipcode" />
+                <ScalarProperty Name="site_address" ColumnName="site_address" />
+                <ScalarProperty Name="site_city" ColumnName="site_city" />
+                <ScalarProperty Name="site_state" ColumnName="site_state" />
+                <ScalarProperty Name="tax_regime" ColumnName="tax_regime" />
+                <ScalarProperty Name="site_rfc" ColumnName="site_rfc" />
+                <ScalarProperty Name="site_irs_name" ColumnName="site_irs_name" />
+                <ScalarProperty Name="site_name" ColumnName="site_name" />
+                <ScalarProperty Name="site_code" ColumnName="site_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DFLPOS_DISTRIBUTION">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.DFLPOS_DISTRIBUTION">
+              <MappingFragment StoreEntitySet="DFLPOS_DISTRIBUTION">
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="estate" ColumnName="estate" />
+                <ScalarProperty Name="site_id" ColumnName="site_id" />
+                <ScalarProperty Name="version_id" ColumnName="version_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DFLPOS_SITES">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.DFLPOS_SITES">
+              <MappingFragment StoreEntitySet="DFLPOS_SITES">
+                <ScalarProperty Name="destination_route" ColumnName="destination_route" />
+                <ScalarProperty Name="ftp_password" ColumnName="ftp_password" />
+                <ScalarProperty Name="ftp_user" ColumnName="ftp_user" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DFLPOS_VERSIONS">
+            <EntityTypeMapping TypeName="DFLPOS_UPDATERModel.DFLPOS_VERSIONS">
+              <MappingFragment StoreEntitySet="DFLPOS_VERSIONS">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="upload_date" ColumnName="upload_date" />
+                <ScalarProperty Name="files" ColumnName="files" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

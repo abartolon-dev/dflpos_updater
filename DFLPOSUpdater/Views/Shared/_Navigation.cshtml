@@ -1,0 +1,120 @@
+﻿@using System.Data
+@model DFLPOSUpdater.ViewModels.Home.NavigationViewModel
+
+<div id="navigation">
+    <div class="profile-picture">
+        <a href="/Home/Index">
+            @if (@Model.photo != null)
+            {
+                var imgSrcPerf = String.Format("data:image;base64,{0}", Convert.ToBase64String(Model.photo));
+                <img src="@imgSrcPerf" class="img-circle m-b" width="80" height="80" />
+                <i class="img-circle m-b"></i>
+            }
+            else
+            {
+                <i class="fa pe-7s-user fa-5x"></i>
+            }
+        </a>
+        <div class="stats-label text-color">
+            <span class="font-extra-bold font-uppercase" id="UserNameSessionGlobalPV">@Model.user_name</span>
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                    <small class="text-muted">Perfil<b class="caret"></b></small>
+                </a>
+                <ul class="dropdown-menu animated flipInX m-t-xs">
+                    <li>
+                        <a href="/Configuration/ADMS006">Perfil</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a onclick="StartLoading();location.href='@Url.Action("Logout", "Home")'">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <ul class="nav metismenu" id="side-menu">
+        @{
+            string[] url = null;
+            DataView dv = new DataView(Model.menu_user_dataset.Tables[0]);
+
+            // ****** Menus Principales ******
+            dv.RowFilter = "ISNULL(level_1_menu, '') <> '' and type='page'";
+            // ****** Menus Principales ******
+        }
+        @if (dv.Count > 0)
+        {
+            /*******************/
+            var activeMenu = "";
+            /*******************/
+
+            foreach (DataRowView rowView in dv)
+            {
+                DataRow rowMenu = rowView.Row;
+                if (@rowMenu["url"].ToString().Contains("/") == true)
+                {
+                    url = (@rowMenu["url"].ToString()).Split('/');
+                    DataView Sub = new DataView(Model.menu_user_dataset.Tables[0]);
+
+                    // ****** Vistas de Menu ******
+                    Sub.RowFilter = "ISNULL(level_2_menu, '') = '" + @rowMenu["level_1_menu"] + "'and type='page'";
+                    // ****** Vistas de Menu ******
+
+                    /*******************/
+                    activeMenu = Html.DaevEsVegano(Sub: Sub, Model: Model.menu_user_dataset.Tables[0]);
+                    /*******************/
+                    <li class="@activeMenu">
+                        <a href="#"><span class="nav-label"> @rowMenu["level_1_menu"]</span><span class="fa arrow"></span></a>
+                        <ul class="nav metismenu ">
+                            @foreach (DataRowView rowViewsub in Sub)
+                            {
+                                DataRow rowSubMenu = rowViewsub.Row;
+
+                                if (rowSubMenu["url"].ToString().Contains("/") == true)
+                                {
+                                    DataView level3 = new DataView(Model.menu_user_dataset.Tables[0]);
+                                    level3.RowFilter = "ISNULL(level_3_menu, '') = '" + rowSubMenu["page_id"] + "'and type='page'";
+                                    url = (rowSubMenu["url"].ToString()).Split('/');
+                                    var activeFlag = "";
+
+                                    foreach (DataRowView rowViewlevel3 in level3)
+                                    {
+                                        DataRow rowLevel3 = rowViewlevel3.Row;
+                                        url = (rowLevel3["url"].ToString()).Split('/');
+
+                                        if (Html.IsSelected(action: "" + url[2] + "", controller: "" + url[1] + "").Equals("active"))
+                                        {
+                                            activeFlag = "active";
+                                        }
+                                    }
+                                    <li class="@activeFlag">
+                                        @if (level3.Count > 0)
+                                        {
+                                            <a href="@Url.Action("" + url[2] + "", "" + url[1] + "")" data-toggle="tooltip" data-placement="top" title="@rowSubMenu["description"]" style="border-bottom:1px ridge #E4E5E7;"><span class="nav-label" style="margin-left:4%;color:dimgrey;font-family:'Arial Rounded MT';">@rowSubMenu["page_name"]</span><span class="fa arrow"></span></a>
+
+                                            <ul class="nav nav-second-level active">
+                                                @foreach (DataRowView rowViewlevel3 in level3)
+                                                {
+                                                    DataRow rowLevel3 = rowViewlevel3.Row;
+                                                    url = (rowLevel3["url"].ToString()).Split('/');
+
+                                                    <li class="@Html.IsSelected(action: "" + url[2] + "",controller:  "" + url[1] + "")">
+                                                        <a href="@Url.Action("" + url[2] + "", "" + url[1] + "")" data-toggle="tooltip" data-placement="top" title="@rowLevel3["description"]"><span class="nav-label" style="margin-left:8%;">@rowLevel3["page_name"]</span></a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("" + url[2] + "", "" + url[1] + "")" data-toggle="tooltip" data-placement="top" title="@rowSubMenu["description"]"><span class="nav-label">@rowSubMenu["page_name"]</span></a>
+                                        }
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
+            }
+        }
+    </ul>
+</div>

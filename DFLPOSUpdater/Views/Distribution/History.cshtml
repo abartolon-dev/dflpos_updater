@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DFLPOSUpdater.ViewModels.Distributions.DistributionViewModel>
+
+<h2>Distribution History</h2>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>File</th>
+            <th>Site</th>
+            <th>IP</th>
+            <th>Status</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr class="table-@d.StateCss">
+                <td>@d.CreatedDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@d.VersionNumber</td>
+                <td>@d.FileName</td>
+                <td>@d.SiteName</td>
+                <td>@d.SiteIp</td>
+                <td><strong>@d.State</strong></td>
+                <td>@d.Message</td>
+            </tr>
+        }
+    </tbody>
+</table>

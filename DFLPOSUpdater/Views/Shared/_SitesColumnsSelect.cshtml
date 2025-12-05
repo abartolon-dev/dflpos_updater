@@ -1,0 +1,75 @@
+﻿<style>
+    .RowCheck ul li { /*remover el estilo del listado*/
+        list-style: none;
+        font-size: 16px;
+        font-weight: normal;
+        margin-left: -30px;
+    }
+</style>
+@{
+    string strNameExtra = "MG";
+
+}
+<div class="col-lg-12">
+    <div class="hpanel" id="divCheckCollapsedPVG">
+        <div class="panel-heading hbuilt">
+            <div class="pull-right" id="DivDistrictSite">
+                @foreach (var item in @Model.Districts)
+                {
+                    <a class="btn btn-default btn-xs" id="@item.Trim()@strNameExtra" onclick="CheckSitesDistrictPVG(this.id);">@item.Trim()</a>
+                }
+                <a class="showhide">  <i class="fa fa-chevron-up"></i></a>
+            </div>
+            <i class="fa fa-shopping-cart"></i> ERP DE SUCURSALES
+        </div>
+        <div class="panel-body">
+            <div class="RowCheck row" id="CheckBoxesSitesPVG">
+                <div class="col-lg-3 border-right">
+                    <ul id="CheckStores1">
+                        @for (int countCheckSites = 0; countCheckSites < Model.ListPosition.first_column_for_column_4; countCheckSites++)
+                        {
+                            <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" data-toggle="tooltip" data-placement="bottom" title="@Model.Sites[countCheckSites].District - @Model.Sites[countCheckSites].City">
+                                <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" name="@Model.Sites[countCheckSites].District" class="i-checks"> <a target="_blank" href="http://@Model.Sites[countCheckSites].UrlSite.Trim()" id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" style="font-weight: normal;">@Model.Sites[countCheckSites].SiteName.Trim() </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-lg-3 border-right">
+                    <ul id="CheckStores2">
+                        @for (int countCheckSites = Model.ListPosition.first_column_for_column_4; countCheckSites < Model.ListPosition.second_column_for_column_4; countCheckSites++)
+                        {
+                            <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" data-toggle="tooltip" data-placement="bottom" title="@Model.Sites[countCheckSites].District - @Model.Sites[countCheckSites].City">
+                                <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" name="@Model.Sites[countCheckSites].District" class="i-checks"> <a target="_blank" href="http://@Model.Sites[countCheckSites].UrlSite.Trim()" id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" style="font-weight: normal;">@Model.Sites[countCheckSites].SiteName.Trim() </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-lg-3 border-right">
+                    <ul id="CheckStores3">
+                        @for (int countCheckSites = Model.ListPosition.second_column_for_column_4; countCheckSites < Model.ListPosition.third_column_for_column_4; countCheckSites++)
+                        {
+                            <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" data-toggle="tooltip" data-placement="bottom" title="@Model.Sites[countCheckSites].District - @Model.Sites[countCheckSites].City">
+                                <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" name="@Model.Sites[countCheckSites].District" class="i-checks"> <a target="_blank" href="http://@Model.Sites[countCheckSites].UrlSite.Trim()" id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" style="font-weight: normal;">@Model.Sites[countCheckSites].SiteName.Trim() </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-lg-3 ">
+                    <ul id="CheckStores3">
+                        @for (int countCheckSites = Model.ListPosition.third_column_for_column_4; countCheckSites < Model.ListPosition.all_sites_actives; countCheckSites++)
+                        {
+                            <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" data-toggle="tooltip" data-placement="bottom" title="@Model.Sites[countCheckSites].District - @Model.Sites[countCheckSites].City">
+                                <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" name="@Model.Sites[countCheckSites].District" class="i-checks"> <a target="_blank" href="http://@Model.Sites[countCheckSites].UrlSite.Trim()" id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()@strNameExtra" style="font-weight: normal;">@Model.Sites[countCheckSites].SiteName.Trim() </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer clearfix">
+        </div>
+    </div>
+</div>
+@Html.Hidden("count_div_panel_checkbox", 0)
+@Html.Hidden("div_panel_inputs", 0)
+@Html.Hidden("div_panel_percentage", 0)

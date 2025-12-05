@@ -1,0 +1,1262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GiftCardEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.AccessLogs' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="AccessLogs">
+          <Key>
+            <PropertyRef Name="access_id" />
+            <PropertyRef Name="access_username" />
+          </Key>
+          <Property Name="access_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="access_username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="access_ip" Type="varchar" MaxLength="100" />
+          <Property Name="access_date" Type="datetime" />
+          <Property Name="access_success" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.Clientes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="cliente_id" />
+            <PropertyRef Name="cliente_nombre" />
+            <PropertyRef Name="cliente_RFC" />
+            <PropertyRef Name="cliente_direccion_calle" />
+            <PropertyRef Name="cliente_direccion_estado" />
+            <PropertyRef Name="cliente_direccion_ciudad" />
+            <PropertyRef Name="cliente_direccion_colonia" />
+          </Key>
+          <Property Name="cliente_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cliente_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="cliente_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cliente_RFC" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cliente_direccion_calle" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="cliente_direccion_numeroInterior" Type="varchar" MaxLength="10" />
+          <Property Name="cliente_direccion_numeroExterior" Type="varchar" MaxLength="10" />
+          <Property Name="cliente_direccion_pais" Type="varchar" MaxLength="50" />
+          <Property Name="cliente_direccion_estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cliente_direccion_ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cliente_direccion_colonia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cliente_status" Type="int" />
+          <Property Name="cliente_saldo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cliente_interno" Type="char" MaxLength="1" />
+          <Property Name="cliente_puedefacturar" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.Historial' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="historial_id" />
+            <PropertyRef Name="historial_tipo" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="historial_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="historial_tipo" Type="int" Nullable="false" />
+          <Property Name="saldo_actual" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="monto" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ip" Type="varchar" MaxLength="50" />
+          <Property Name="cliente_id" Type="int" />
+          <Property Name="usuario_id" Type="int" />
+          <Property Name="tarjeta_id" Type="int" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="site_code" Type="varchar" MaxLength="50" />
+          <Property Name="posid" Type="varchar" MaxLength="50" />
+          <Property Name="saleid" Type="varchar" MaxLength="50" />
+          <Property Name="partner_id" Type="int" />
+          <Property Name="cancellation_id" Type="bigint" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.HistorialTipo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="HistorialTipo">
+          <Key>
+            <PropertyRef Name="historialtipo_id" />
+            <PropertyRef Name="historialtipo_descripcion" />
+          </Key>
+          <Property Name="historialtipo_id" Type="int" Nullable="false" />
+          <Property Name="historialtipo_descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="historialtipo_cargo" Type="int" />
+          <Property Name="cargoTarjeta" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.MailLog' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="MailLog">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="date" />
+            <PropertyRef Name="log_identifier" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="log_identifier" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.MailMaster' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="MailMaster">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="log_id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="date_register" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="log_id" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="last_name" Type="nchar" MaxLength="20" />
+          <Property Name="last_name2" Type="nchar" MaxLength="20" />
+          <Property Name="email" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="direction" Type="nchar" MaxLength="50" />
+          <Property Name="phone" Type="nchar" MaxLength="10" />
+          <Property Name="date_register" Type="datetime" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.Menus' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="menu_id" />
+            <PropertyRef Name="menu_nombre" />
+            <PropertyRef Name="menu_url" />
+          </Key>
+          <Property Name="menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menu_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="menu_descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="menu_url" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="menu_imagen" Type="varchar" MaxLength="50" />
+          <Property Name="menu_orden" Type="int" />
+          <Property Name="menu_padre" Type="int" />
+          <Property Name="menu_habilitado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Packages">
+          <Key>
+            <PropertyRef Name="package_id" />
+          </Key>
+          <Property Name="package_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="package_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="package_date" Type="datetime" Nullable="false" />
+          <Property Name="enabled" Type="int" />
+        </EntityType>
+        <EntityType Name="PackagesDetail">
+          <Key>
+            <PropertyRef Name="packagedetail_id" />
+          </Key>
+          <Property Name="packagedetail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="package_id" Type="int" Nullable="false" />
+          <Property Name="part_number" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="part_count" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.PaqueteVenta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="PaqueteVenta">
+          <Key>
+            <PropertyRef Name="paqueteventa_Id" />
+            <PropertyRef Name="tarjeta_id" />
+            <PropertyRef Name="saledate" />
+            <PropertyRef Name="partner_id" />
+            <PropertyRef Name="site_code" />
+            <PropertyRef Name="pos_id" />
+          </Key>
+          <Property Name="paqueteventa_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tarjeta_id" Type="int" Nullable="false" />
+          <Property Name="saledate" Type="datetime" Nullable="false" />
+          <Property Name="partner_id" Type="int" Nullable="false" />
+          <Property Name="site_code" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="pos_id" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="saledate_close" Type="varchar" MaxLength="4" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.PaqueteVentaDetalle' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="PaqueteVentaDetalle">
+          <Key>
+            <PropertyRef Name="paqueteventa_Id" />
+            <PropertyRef Name="paqueteventadetalle_id" />
+            <PropertyRef Name="paqueteventadetalle_part_number" />
+            <PropertyRef Name="paqueteventadetalle_cantidad" />
+            <PropertyRef Name="partner_id" />
+            <PropertyRef Name="saledate" />
+            <PropertyRef Name="site_code" />
+            <PropertyRef Name="pos_id" />
+          </Key>
+          <Property Name="paqueteventa_Id" Type="int" Nullable="false" />
+          <Property Name="paqueteventadetalle_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paqueteventadetalle_part_number" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="paqueteventadetalle_cantidad" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="partner_id" Type="int" Nullable="false" />
+          <Property Name="saledate" Type="datetime" Nullable="false" />
+          <Property Name="site_code" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="pos_id" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.Perfiles' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Perfiles">
+          <Key>
+            <PropertyRef Name="perfil_id" />
+            <PropertyRef Name="perfil_nombre" />
+          </Key>
+          <Property Name="perfil_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="perfil_nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="special" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.PerfilesDetail' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="PerfilesDetail">
+          <Key>
+            <PropertyRef Name="perfildetail_id" />
+            <PropertyRef Name="menu_id" />
+            <PropertyRef Name="perfil_id" />
+          </Key>
+          <Property Name="perfildetail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menu_id" Type="int" Nullable="false" />
+          <Property Name="perfil_id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'TARJETA.dbo.SITE_LINK' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="SITE_LINK">
+          <Property Name="cliente_id" Type="int" />
+          <Property Name="Sucursal" Type="varchar" MaxLength="100" />
+          <Property Name="Empresa" Type="varchar" MaxLength="100" />
+        </EntityType>-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.Sites' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Sites">
+          <Key>
+            <PropertyRef Name="site_id" />
+            <PropertyRef Name="site_code" />
+            <PropertyRef Name="site_desc" />
+          </Key>
+          <Property Name="site_id" Type="int" Nullable="false" />
+          <Property Name="site_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="site_desc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="site_conexion" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.TARJETA_CARGA_MASIVA_TEMP' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="TARJETA_CARGA_MASIVA_TEMP">
+          <Key>
+            <PropertyRef Name="tarjeta_id" />
+            <PropertyRef Name="no_empleado" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="monto" />
+            <PropertyRef Name="timestamp" />
+          </Key>
+          <Property Name="tarjeta_id" Type="int" Nullable="false" />
+          <Property Name="no_empleado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="timestamp" Type="date" Nullable="false" />
+          <Property Name="Sucursal" Type="varchar" MaxLength="100" />
+          <Property Name="No_Tarjeta" Type="varchar" MaxLength="20" />
+          <Property Name="Empresa" Type="varchar" MaxLength="100" />
+          <Property Name="partner_id" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'TARJETA.dbo.TARJETA_EMPLEADO' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="TARJETA_EMPLEADO">
+          <Property Name="tarjeta_id" Type="int" />
+          <Property Name="numero_empleado" Type="varchar" MaxLength="20" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+          <Property Name="timestamp" Type="datetime" />
+        </EntityType>-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.TarjetaDescuentos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="TarjetaDescuentos">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="NumeroEmpleado" />
+            <PropertyRef Name="NumeroTarjeta" />
+            <PropertyRef Name="Cliente_Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="NumeroEmpleado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NumeroTarjeta" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Cliente_Id" Type="int" Nullable="false" />
+          <Property Name="CodigoVerificador" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.TarjetaPackages' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="TarjetaPackages">
+          <Key>
+            <PropertyRef Name="Tarjeta_id" />
+            <PropertyRef Name="tarjetapackage_id" />
+            <PropertyRef Name="package_id" />
+          </Key>
+          <Property Name="Tarjeta_id" Type="int" Nullable="false" />
+          <Property Name="tarjetapackage_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="package_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TarjetaPackagesDetail">
+          <Key>
+            <PropertyRef Name="tarjetapackagesdetaill_id" />
+          </Key>
+          <Property Name="tarjetapackagesdetaill_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tarjetapackage_id" Type="int" Nullable="false" />
+          <Property Name="package_id" Type="int" Nullable="false" />
+          <Property Name="part_number" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="part_left" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="part_orign" Type="decimal" Precision="19" Scale="2" />
+        </EntityType>
+        <EntityType Name="Tarjetas">
+          <Key>
+            <PropertyRef Name="tarjeta_id" />
+          </Key>
+          <Property Name="tarjeta_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tarjeta_numero" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tarjeta_monto" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tarjeta_referencia" Type="varchar" MaxLength="500" />
+          <Property Name="cliente_id" Type="int" />
+          <Property Name="estado" Type="int" />
+          <Property Name="tarjeta_tipo" Type="int" />
+          <Property Name="tarjeta_dv" Type="char" MaxLength="1" />
+          <Property Name="version" Type="int" />
+          <Property Name="timestamp" Type="datetime" />
+          <Property Name="registro_nuevo" Type="bit" Nullable="false" />
+          <Property Name="ActivationID" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.TarjetasSaldoAnterior' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="TarjetasSaldoAnterior">
+          <Key>
+            <PropertyRef Name="tarjeta_id" />
+            <PropertyRef Name="tarjeta_numero" />
+          </Key>
+          <Property Name="tarjeta_id" Type="int" Nullable="false" />
+          <Property Name="tarjeta_numero" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tarjeta_monto_original" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tarjeta_referencia" Type="varchar" MaxLength="500" />
+          <Property Name="cliente_id" Type="int" />
+          <Property Name="estado" Type="int" />
+          <Property Name="tarjeta_tipo" Type="int" />
+          <Property Name="tarjeta_dv" Type="char" MaxLength="1" />
+          <Property Name="version" Type="int" />
+          <Property Name="fecha_eliminacion" Type="datetime" />
+          <Property Name="saldo_final" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TarjetaTransfer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="from_tarjeta_numero" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="to_tarjeta_numero" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="timestamp" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'TARJETA.dbo.TEMP_CARD' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="TEMP_CARD">
+          <Property Name="tarjeta_numero" Type="varchar" MaxLength="100" />
+        </EntityType>-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TARJETA.dbo.Usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+            <PropertyRef Name="usuario_nombre" />
+            <PropertyRef Name="usuario_password" />
+            <PropertyRef Name="cliente_id" />
+            <PropertyRef Name="perfil_id" />
+          </Key>
+          <Property Name="usuario_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_nombre" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="usuario_password" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="cliente_id" Type="int" Nullable="false" />
+          <Property Name="perfil_id" Type="int" Nullable="false" />
+          <Property Name="usuario_enabled" Type="int" />
+          <Property Name="cliente_interno" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityContainer Name="GiftCardEntitiesStoreContainer">
+          <EntitySet Name="Packages" EntityType="Self.Packages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackagesDetail" EntityType="Self.PackagesDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TarjetaPackagesDetail" EntityType="Self.TarjetaPackagesDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarjetas" EntityType="Self.Tarjetas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TarjetaTransfer" EntityType="Self.TarjetaTransfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccessLogs" EntityType="Self.AccessLogs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AccessLogs].[access_id] AS [access_id], 
+    [AccessLogs].[access_username] AS [access_username], 
+    [AccessLogs].[access_ip] AS [access_ip], 
+    [AccessLogs].[access_date] AS [access_date], 
+    [AccessLogs].[access_success] AS [access_success]
+    FROM [dbo].[AccessLogs] AS [AccessLogs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Clientes].[cliente_id] AS [cliente_id], 
+    [Clientes].[cliente_codigo] AS [cliente_codigo], 
+    [Clientes].[cliente_nombre] AS [cliente_nombre], 
+    [Clientes].[cliente_RFC] AS [cliente_RFC], 
+    [Clientes].[cliente_direccion_calle] AS [cliente_direccion_calle], 
+    [Clientes].[cliente_direccion_numeroInterior] AS [cliente_direccion_numeroInterior], 
+    [Clientes].[cliente_direccion_numeroExterior] AS [cliente_direccion_numeroExterior], 
+    [Clientes].[cliente_direccion_pais] AS [cliente_direccion_pais], 
+    [Clientes].[cliente_direccion_estado] AS [cliente_direccion_estado], 
+    [Clientes].[cliente_direccion_ciudad] AS [cliente_direccion_ciudad], 
+    [Clientes].[cliente_direccion_colonia] AS [cliente_direccion_colonia], 
+    [Clientes].[cliente_status] AS [cliente_status], 
+    [Clientes].[cliente_saldo] AS [cliente_saldo], 
+    [Clientes].[cliente_interno] AS [cliente_interno], 
+    [Clientes].[cliente_puedefacturar] AS [cliente_puedefacturar]
+    FROM [dbo].[Clientes] AS [Clientes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Historial" EntityType="Self.Historial" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Historial].[historial_id] AS [historial_id], 
+    [Historial].[historial_tipo] AS [historial_tipo], 
+    [Historial].[saldo_actual] AS [saldo_actual], 
+    [Historial].[monto] AS [monto], 
+    [Historial].[ip] AS [ip], 
+    [Historial].[cliente_id] AS [cliente_id], 
+    [Historial].[usuario_id] AS [usuario_id], 
+    [Historial].[tarjeta_id] AS [tarjeta_id], 
+    [Historial].[fecha] AS [fecha], 
+    [Historial].[site_code] AS [site_code], 
+    [Historial].[posid] AS [posid], 
+    [Historial].[saleid] AS [saleid], 
+    [Historial].[partner_id] AS [partner_id], 
+    [Historial].[cancellation_id] AS [cancellation_id]
+    FROM [dbo].[Historial] AS [Historial]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="HistorialTipo" EntityType="Self.HistorialTipo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HistorialTipo].[historialtipo_id] AS [historialtipo_id], 
+    [HistorialTipo].[historialtipo_descripcion] AS [historialtipo_descripcion], 
+    [HistorialTipo].[historialtipo_cargo] AS [historialtipo_cargo], 
+    [HistorialTipo].[cargoTarjeta] AS [cargoTarjeta]
+    FROM [dbo].[HistorialTipo] AS [HistorialTipo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MailLog" EntityType="Self.MailLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MailLog].[id] AS [id], 
+    [MailLog].[date] AS [date], 
+    [MailLog].[log_identifier] AS [log_identifier], 
+    [MailLog].[status] AS [status]
+    FROM [dbo].[MailLog] AS [MailLog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MailMaster" EntityType="Self.MailMaster" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MailMaster].[id] AS [id], 
+    [MailMaster].[log_id] AS [log_id], 
+    [MailMaster].[name] AS [name], 
+    [MailMaster].[last_name] AS [last_name], 
+    [MailMaster].[last_name2] AS [last_name2], 
+    [MailMaster].[email] AS [email], 
+    [MailMaster].[direction] AS [direction], 
+    [MailMaster].[phone] AS [phone], 
+    [MailMaster].[date_register] AS [date_register], 
+    [MailMaster].[status] AS [status]
+    FROM [dbo].[MailMaster] AS [MailMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Menus" EntityType="Self.Menus" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Menus].[menu_id] AS [menu_id], 
+    [Menus].[menu_nombre] AS [menu_nombre], 
+    [Menus].[menu_descripcion] AS [menu_descripcion], 
+    [Menus].[menu_url] AS [menu_url], 
+    [Menus].[menu_imagen] AS [menu_imagen], 
+    [Menus].[menu_orden] AS [menu_orden], 
+    [Menus].[menu_padre] AS [menu_padre], 
+    [Menus].[menu_habilitado] AS [menu_habilitado]
+    FROM [dbo].[Menus] AS [Menus]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PaqueteVenta" EntityType="Self.PaqueteVenta" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PaqueteVenta].[paqueteventa_Id] AS [paqueteventa_Id], 
+    [PaqueteVenta].[tarjeta_id] AS [tarjeta_id], 
+    [PaqueteVenta].[saledate] AS [saledate], 
+    [PaqueteVenta].[partner_id] AS [partner_id], 
+    [PaqueteVenta].[site_code] AS [site_code], 
+    [PaqueteVenta].[pos_id] AS [pos_id], 
+    [PaqueteVenta].[saledate_close] AS [saledate_close], 
+    [PaqueteVenta].[status] AS [status]
+    FROM [dbo].[PaqueteVenta] AS [PaqueteVenta]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PaqueteVentaDetalle" EntityType="Self.PaqueteVentaDetalle" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PaqueteVentaDetalle].[paqueteventa_Id] AS [paqueteventa_Id], 
+    [PaqueteVentaDetalle].[paqueteventadetalle_id] AS [paqueteventadetalle_id], 
+    [PaqueteVentaDetalle].[paqueteventadetalle_part_number] AS [paqueteventadetalle_part_number], 
+    [PaqueteVentaDetalle].[paqueteventadetalle_cantidad] AS [paqueteventadetalle_cantidad], 
+    [PaqueteVentaDetalle].[partner_id] AS [partner_id], 
+    [PaqueteVentaDetalle].[saledate] AS [saledate], 
+    [PaqueteVentaDetalle].[site_code] AS [site_code], 
+    [PaqueteVentaDetalle].[pos_id] AS [pos_id]
+    FROM [dbo].[PaqueteVentaDetalle] AS [PaqueteVentaDetalle]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Perfiles" EntityType="Self.Perfiles" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Perfiles].[perfil_id] AS [perfil_id], 
+    [Perfiles].[perfil_nombre] AS [perfil_nombre], 
+    [Perfiles].[special] AS [special]
+    FROM [dbo].[Perfiles] AS [Perfiles]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PerfilesDetail" EntityType="Self.PerfilesDetail" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PerfilesDetail].[perfildetail_id] AS [perfildetail_id], 
+    [PerfilesDetail].[menu_id] AS [menu_id], 
+    [PerfilesDetail].[perfil_id] AS [perfil_id]
+    FROM [dbo].[PerfilesDetail] AS [PerfilesDetail]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Sites" EntityType="Self.Sites" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Sites].[site_id] AS [site_id], 
+    [Sites].[site_code] AS [site_code], 
+    [Sites].[site_desc] AS [site_desc], 
+    [Sites].[site_conexion] AS [site_conexion]
+    FROM [dbo].[Sites] AS [Sites]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TARJETA_CARGA_MASIVA_TEMP" EntityType="Self.TARJETA_CARGA_MASIVA_TEMP" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TARJETA_CARGA_MASIVA_TEMP].[tarjeta_id] AS [tarjeta_id], 
+    [TARJETA_CARGA_MASIVA_TEMP].[no_empleado] AS [no_empleado], 
+    [TARJETA_CARGA_MASIVA_TEMP].[nombre] AS [nombre], 
+    [TARJETA_CARGA_MASIVA_TEMP].[monto] AS [monto], 
+    [TARJETA_CARGA_MASIVA_TEMP].[timestamp] AS [timestamp], 
+    [TARJETA_CARGA_MASIVA_TEMP].[Sucursal] AS [Sucursal], 
+    [TARJETA_CARGA_MASIVA_TEMP].[No_Tarjeta] AS [No_Tarjeta], 
+    [TARJETA_CARGA_MASIVA_TEMP].[Empresa] AS [Empresa], 
+    [TARJETA_CARGA_MASIVA_TEMP].[partner_id] AS [partner_id]
+    FROM [dbo].[TARJETA_CARGA_MASIVA_TEMP] AS [TARJETA_CARGA_MASIVA_TEMP]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TarjetaDescuentos" EntityType="Self.TarjetaDescuentos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TarjetaDescuentos].[Id] AS [Id], 
+    [TarjetaDescuentos].[Nombre] AS [Nombre], 
+    [TarjetaDescuentos].[NumeroEmpleado] AS [NumeroEmpleado], 
+    [TarjetaDescuentos].[NumeroTarjeta] AS [NumeroTarjeta], 
+    [TarjetaDescuentos].[Cliente_Id] AS [Cliente_Id], 
+    [TarjetaDescuentos].[CodigoVerificador] AS [CodigoVerificador]
+    FROM [dbo].[TarjetaDescuentos] AS [TarjetaDescuentos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TarjetaPackages" EntityType="Self.TarjetaPackages" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TarjetaPackages].[Tarjeta_id] AS [Tarjeta_id], 
+    [TarjetaPackages].[tarjetapackage_id] AS [tarjetapackage_id], 
+    [TarjetaPackages].[package_id] AS [package_id]
+    FROM [dbo].[TarjetaPackages] AS [TarjetaPackages]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TarjetasSaldoAnterior" EntityType="Self.TarjetasSaldoAnterior" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TarjetasSaldoAnterior].[tarjeta_id] AS [tarjeta_id], 
+    [TarjetasSaldoAnterior].[tarjeta_numero] AS [tarjeta_numero], 
+    [TarjetasSaldoAnterior].[tarjeta_monto_original] AS [tarjeta_monto_original], 
+    [TarjetasSaldoAnterior].[tarjeta_referencia] AS [tarjeta_referencia], 
+    [TarjetasSaldoAnterior].[cliente_id] AS [cliente_id], 
+    [TarjetasSaldoAnterior].[estado] AS [estado], 
+    [TarjetasSaldoAnterior].[tarjeta_tipo] AS [tarjeta_tipo], 
+    [TarjetasSaldoAnterior].[tarjeta_dv] AS [tarjeta_dv], 
+    [TarjetasSaldoAnterior].[version] AS [version], 
+    [TarjetasSaldoAnterior].[fecha_eliminacion] AS [fecha_eliminacion], 
+    [TarjetasSaldoAnterior].[saldo_final] AS [saldo_final]
+    FROM [dbo].[TarjetasSaldoAnterior] AS [TarjetasSaldoAnterior]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Usuarios].[usuario_id] AS [usuario_id], 
+    [Usuarios].[usuario_nombre] AS [usuario_nombre], 
+    [Usuarios].[usuario_password] AS [usuario_password], 
+    [Usuarios].[cliente_id] AS [cliente_id], 
+    [Usuarios].[perfil_id] AS [perfil_id], 
+    [Usuarios].[usuario_enabled] AS [usuario_enabled], 
+    [Usuarios].[cliente_interno] AS [cliente_interno]
+    FROM [dbo].[Usuarios] AS [Usuarios]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GiftCardEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="package_id" />
+          </Key>
+          <Property Name="package_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="package_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="package_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="enabled" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PackagesDetail">
+          <Key>
+            <PropertyRef Name="packagedetail_id" />
+          </Key>
+          <Property Name="packagedetail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="package_id" Type="Int32" Nullable="false" />
+          <Property Name="part_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="part_count" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TarjetaPackagesDetail">
+          <Key>
+            <PropertyRef Name="tarjetapackagesdetaill_id" />
+          </Key>
+          <Property Name="tarjetapackagesdetaill_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tarjetapackage_id" Type="Int32" Nullable="false" />
+          <Property Name="package_id" Type="Int32" Nullable="false" />
+          <Property Name="part_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="part_left" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="part_orign" Type="Decimal" Precision="19" Scale="2" />
+        </EntityType>
+        <EntityType Name="Tarjeta">
+          <Key>
+            <PropertyRef Name="tarjeta_id" />
+          </Key>
+          <Property Name="tarjeta_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tarjeta_numero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tarjeta_monto" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tarjeta_referencia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_id" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="tarjeta_tipo" Type="Int32" />
+          <Property Name="tarjeta_dv" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="timestamp" Type="DateTime" Precision="3" />
+          <Property Name="registro_nuevo" Type="Boolean" Nullable="false" />
+          <Property Name="ActivationID" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TarjetaTransfer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="from_tarjeta_numero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="to_tarjeta_numero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="timestamp" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AccessLog">
+          <Key>
+            <PropertyRef Name="access_id" />
+            <PropertyRef Name="access_username" />
+          </Key>
+          <Property Name="access_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="access_username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="access_ip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="access_date" Type="DateTime" Precision="3" />
+          <Property Name="access_success" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="cliente_id" />
+            <PropertyRef Name="cliente_nombre" />
+            <PropertyRef Name="cliente_RFC" />
+            <PropertyRef Name="cliente_direccion_calle" />
+            <PropertyRef Name="cliente_direccion_estado" />
+            <PropertyRef Name="cliente_direccion_ciudad" />
+            <PropertyRef Name="cliente_direccion_colonia" />
+          </Key>
+          <Property Name="cliente_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cliente_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cliente_RFC" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cliente_direccion_calle" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cliente_direccion_numeroInterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_direccion_numeroExterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_direccion_pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_direccion_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cliente_direccion_ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cliente_direccion_colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cliente_status" Type="Int32" />
+          <Property Name="cliente_saldo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cliente_interno" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cliente_puedefacturar" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="historial_id" />
+            <PropertyRef Name="historial_tipo" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="historial_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="historial_tipo" Type="Int32" Nullable="false" />
+          <Property Name="saldo_actual" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="monto" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_id" Type="Int32" />
+          <Property Name="usuario_id" Type="Int32" />
+          <Property Name="tarjeta_id" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="site_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="posid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="saleid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="partner_id" Type="Int32" />
+          <Property Name="cancellation_id" Type="Int64" />
+        </EntityType>
+        <EntityType Name="HistorialTipo">
+          <Key>
+            <PropertyRef Name="historialtipo_id" />
+            <PropertyRef Name="historialtipo_descripcion" />
+          </Key>
+          <Property Name="historialtipo_id" Type="Int32" Nullable="false" />
+          <Property Name="historialtipo_descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="historialtipo_cargo" Type="Int32" />
+          <Property Name="cargoTarjeta" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MailLog">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="date" />
+            <PropertyRef Name="log_identifier" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="log_identifier" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MailMaster">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="log_id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="date_register" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="log_id" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="last_name2" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="direction" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="date_register" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="menu_id" />
+            <PropertyRef Name="menu_nombre" />
+            <PropertyRef Name="menu_url" />
+          </Key>
+          <Property Name="menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menu_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="menu_descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="menu_url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="menu_imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_orden" Type="Int32" />
+          <Property Name="menu_padre" Type="Int32" />
+          <Property Name="menu_habilitado" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PaqueteVenta">
+          <Key>
+            <PropertyRef Name="paqueteventa_Id" />
+            <PropertyRef Name="tarjeta_id" />
+            <PropertyRef Name="saledate" />
+            <PropertyRef Name="partner_id" />
+            <PropertyRef Name="site_code" />
+            <PropertyRef Name="pos_id" />
+          </Key>
+          <Property Name="paqueteventa_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tarjeta_id" Type="Int32" Nullable="false" />
+          <Property Name="saledate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="partner_id" Type="Int32" Nullable="false" />
+          <Property Name="site_code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pos_id" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="saledate_close" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PaqueteVentaDetalle">
+          <Key>
+            <PropertyRef Name="paqueteventa_Id" />
+            <PropertyRef Name="paqueteventadetalle_id" />
+            <PropertyRef Name="paqueteventadetalle_part_number" />
+            <PropertyRef Name="paqueteventadetalle_cantidad" />
+            <PropertyRef Name="partner_id" />
+            <PropertyRef Name="saledate" />
+            <PropertyRef Name="site_code" />
+            <PropertyRef Name="pos_id" />
+          </Key>
+          <Property Name="paqueteventa_Id" Type="Int32" Nullable="false" />
+          <Property Name="paqueteventadetalle_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paqueteventadetalle_part_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="paqueteventadetalle_cantidad" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="partner_id" Type="Int32" Nullable="false" />
+          <Property Name="saledate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="site_code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pos_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Perfile">
+          <Key>
+            <PropertyRef Name="perfil_id" />
+            <PropertyRef Name="perfil_nombre" />
+          </Key>
+          <Property Name="perfil_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="perfil_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="special" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PerfilesDetail">
+          <Key>
+            <PropertyRef Name="perfildetail_id" />
+            <PropertyRef Name="menu_id" />
+            <PropertyRef Name="perfil_id" />
+          </Key>
+          <Property Name="perfildetail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menu_id" Type="Int32" Nullable="false" />
+          <Property Name="perfil_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="site_id" />
+            <PropertyRef Name="site_code" />
+            <PropertyRef Name="site_desc" />
+          </Key>
+          <Property Name="site_id" Type="Int32" Nullable="false" />
+          <Property Name="site_code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="site_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="site_conexion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TARJETA_CARGA_MASIVA_TEMP">
+          <Key>
+            <PropertyRef Name="tarjeta_id" />
+            <PropertyRef Name="no_empleado" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="monto" />
+            <PropertyRef Name="timestamp" />
+          </Key>
+          <Property Name="tarjeta_id" Type="Int32" Nullable="false" />
+          <Property Name="no_empleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Sucursal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="No_Tarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Empresa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="partner_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TarjetaDescuento">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="NumeroEmpleado" />
+            <PropertyRef Name="NumeroTarjeta" />
+            <PropertyRef Name="Cliente_Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroEmpleado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroTarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cliente_Id" Type="Int32" Nullable="false" />
+          <Property Name="CodigoVerificador" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TarjetaPackage">
+          <Key>
+            <PropertyRef Name="Tarjeta_id" />
+            <PropertyRef Name="tarjetapackage_id" />
+            <PropertyRef Name="package_id" />
+          </Key>
+          <Property Name="Tarjeta_id" Type="Int32" Nullable="false" />
+          <Property Name="tarjetapackage_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="package_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TarjetasSaldoAnterior">
+          <Key>
+            <PropertyRef Name="tarjeta_id" />
+            <PropertyRef Name="tarjeta_numero" />
+          </Key>
+          <Property Name="tarjeta_id" Type="Int32" Nullable="false" />
+          <Property Name="tarjeta_numero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tarjeta_monto_original" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tarjeta_referencia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_id" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="tarjeta_tipo" Type="Int32" />
+          <Property Name="tarjeta_dv" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="fecha_eliminacion" Type="DateTime" Precision="3" />
+          <Property Name="saldo_final" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+            <PropertyRef Name="usuario_nombre" />
+            <PropertyRef Name="usuario_password" />
+            <PropertyRef Name="cliente_id" />
+            <PropertyRef Name="perfil_id" />
+          </Key>
+          <Property Name="usuario_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_nombre" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuario_password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cliente_id" Type="Int32" Nullable="false" />
+          <Property Name="perfil_id" Type="Int32" Nullable="false" />
+          <Property Name="usuario_enabled" Type="Int32" />
+          <Property Name="cliente_interno" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="GiftCardEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Packages" EntityType="Self.Package" />
+          <EntitySet Name="PackagesDetails" EntityType="Self.PackagesDetail" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TarjetaPackagesDetails" EntityType="Self.TarjetaPackagesDetail" />
+          <EntitySet Name="Tarjetas" EntityType="Self.Tarjeta" />
+          <EntitySet Name="TarjetaTransfers" EntityType="Self.TarjetaTransfer" />
+          <EntitySet Name="AccessLogs" EntityType="Self.AccessLog" />
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="Historials" EntityType="Self.Historial" />
+          <EntitySet Name="HistorialTipoes" EntityType="Self.HistorialTipo" />
+          <EntitySet Name="MailLogs" EntityType="Self.MailLog" />
+          <EntitySet Name="MailMasters" EntityType="Self.MailMaster" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="PaqueteVentas" EntityType="Self.PaqueteVenta" />
+          <EntitySet Name="PaqueteVentaDetalles" EntityType="Self.PaqueteVentaDetalle" />
+          <EntitySet Name="Perfiles" EntityType="Self.Perfile" />
+          <EntitySet Name="PerfilesDetails" EntityType="Self.PerfilesDetail" />
+          <EntitySet Name="Sites" EntityType="Self.Site" />
+          <EntitySet Name="TARJETA_CARGA_MASIVA_TEMP" EntityType="Self.TARJETA_CARGA_MASIVA_TEMP" />
+          <EntitySet Name="TarjetaDescuentos" EntityType="Self.TarjetaDescuento" />
+          <EntitySet Name="TarjetaPackages" EntityType="Self.TarjetaPackage" />
+          <EntitySet Name="TarjetasSaldoAnteriors" EntityType="Self.TarjetasSaldoAnterior" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GiftCardEntitiesStoreContainer" CdmEntityContainer="GiftCardEntities1">
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="GiftCardEntities.Package">
+              <MappingFragment StoreEntitySet="Packages">
+                <ScalarProperty Name="package_id" ColumnName="package_id" />
+                <ScalarProperty Name="package_name" ColumnName="package_name" />
+                <ScalarProperty Name="package_date" ColumnName="package_date" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackagesDetails">
+            <EntityTypeMapping TypeName="GiftCardEntities.PackagesDetail">
+              <MappingFragment StoreEntitySet="PackagesDetail">
+                <ScalarProperty Name="packagedetail_id" ColumnName="packagedetail_id" />
+                <ScalarProperty Name="package_id" ColumnName="package_id" />
+                <ScalarProperty Name="part_number" ColumnName="part_number" />
+                <ScalarProperty Name="part_count" ColumnName="part_count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GiftCardEntities.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TarjetaPackagesDetails">
+            <EntityTypeMapping TypeName="GiftCardEntities.TarjetaPackagesDetail">
+              <MappingFragment StoreEntitySet="TarjetaPackagesDetail">
+                <ScalarProperty Name="tarjetapackagesdetaill_id" ColumnName="tarjetapackagesdetaill_id" />
+                <ScalarProperty Name="tarjetapackage_id" ColumnName="tarjetapackage_id" />
+                <ScalarProperty Name="package_id" ColumnName="package_id" />
+                <ScalarProperty Name="part_number" ColumnName="part_number" />
+                <ScalarProperty Name="part_left" ColumnName="part_left" />
+                <ScalarProperty Name="part_orign" ColumnName="part_orign" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarjetas">
+            <EntityTypeMapping TypeName="GiftCardEntities.Tarjeta">
+              <MappingFragment StoreEntitySet="Tarjetas">
+                <ScalarProperty Name="tarjeta_id" ColumnName="tarjeta_id" />
+                <ScalarProperty Name="tarjeta_numero" ColumnName="tarjeta_numero" />
+                <ScalarProperty Name="tarjeta_monto" ColumnName="tarjeta_monto" />
+                <ScalarProperty Name="tarjeta_referencia" ColumnName="tarjeta_referencia" />
+                <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="tarjeta_tipo" ColumnName="tarjeta_tipo" />
+                <ScalarProperty Name="tarjeta_dv" ColumnName="tarjeta_dv" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="registro_nuevo" ColumnName="registro_nuevo" />
+                <ScalarProperty Name="ActivationID" ColumnName="ActivationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TarjetaTransfers">
+            <EntityTypeMapping TypeName="GiftCardEntities.TarjetaTransfer">
+              <MappingFragment StoreEntitySet="TarjetaTransfer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="from_tarjeta_numero" ColumnName="from_tarjeta_numero" />
+                <ScalarProperty Name="to_tarjeta_numero" ColumnName="to_tarjeta_numero" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccessLogs">
+            <EntityTypeMapping TypeName="GiftCardEntities.AccessLog">
+              <MappingFragment StoreEntitySet="AccessLogs">
+                <ScalarProperty Name="access_id" ColumnName="access_id" />
+                <ScalarProperty Name="access_username" ColumnName="access_username" />
+                <ScalarProperty Name="access_ip" ColumnName="access_ip" />
+                <ScalarProperty Name="access_date" ColumnName="access_date" />
+                <ScalarProperty Name="access_success" ColumnName="access_success" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="GiftCardEntities.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
+                <ScalarProperty Name="cliente_codigo" ColumnName="cliente_codigo" />
+                <ScalarProperty Name="cliente_nombre" ColumnName="cliente_nombre" />
+                <ScalarProperty Name="cliente_RFC" ColumnName="cliente_RFC" />
+                <ScalarProperty Name="cliente_direccion_calle" ColumnName="cliente_direccion_calle" />
+                <ScalarProperty Name="cliente_direccion_numeroInterior" ColumnName="cliente_direccion_numeroInterior" />
+                <ScalarProperty Name="cliente_direccion_numeroExterior" ColumnName="cliente_direccion_numeroExterior" />
+                <ScalarProperty Name="cliente_direccion_pais" ColumnName="cliente_direccion_pais" />
+                <ScalarProperty Name="cliente_direccion_estado" ColumnName="cliente_direccion_estado" />
+                <ScalarProperty Name="cliente_direccion_ciudad" ColumnName="cliente_direccion_ciudad" />
+                <ScalarProperty Name="cliente_direccion_colonia" ColumnName="cliente_direccion_colonia" />
+                <ScalarProperty Name="cliente_status" ColumnName="cliente_status" />
+                <ScalarProperty Name="cliente_saldo" ColumnName="cliente_saldo" />
+                <ScalarProperty Name="cliente_interno" ColumnName="cliente_interno" />
+                <ScalarProperty Name="cliente_puedefacturar" ColumnName="cliente_puedefacturar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historials">
+            <EntityTypeMapping TypeName="GiftCardEntities.Historial">
+              <MappingFragment StoreEntitySet="Historial">
+                <ScalarProperty Name="historial_id" ColumnName="historial_id" />
+                <ScalarProperty Name="historial_tipo" ColumnName="historial_tipo" />
+                <ScalarProperty Name="saldo_actual" ColumnName="saldo_actual" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="tarjeta_id" ColumnName="tarjeta_id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="site_code" ColumnName="site_code" />
+                <ScalarProperty Name="posid" ColumnName="posid" />
+                <ScalarProperty Name="saleid" ColumnName="saleid" />
+                <ScalarProperty Name="partner_id" ColumnName="partner_id" />
+                <ScalarProperty Name="cancellation_id" ColumnName="cancellation_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistorialTipoes">
+            <EntityTypeMapping TypeName="GiftCardEntities.HistorialTipo">
+              <MappingFragment StoreEntitySet="HistorialTipo">
+                <ScalarProperty Name="historialtipo_id" ColumnName="historialtipo_id" />
+                <ScalarProperty Name="historialtipo_descripcion" ColumnName="historialtipo_descripcion" />
+                <ScalarProperty Name="historialtipo_cargo" ColumnName="historialtipo_cargo" />
+                <ScalarProperty Name="cargoTarjeta" ColumnName="cargoTarjeta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MailLogs">
+            <EntityTypeMapping TypeName="GiftCardEntities.MailLog">
+              <MappingFragment StoreEntitySet="MailLog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="log_identifier" ColumnName="log_identifier" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MailMasters">
+            <EntityTypeMapping TypeName="GiftCardEntities.MailMaster">
+              <MappingFragment StoreEntitySet="MailMaster">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="log_id" ColumnName="log_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="last_name2" ColumnName="last_name2" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="direction" ColumnName="direction" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="date_register" ColumnName="date_register" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="GiftCardEntities.Menu">
+              <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+                <ScalarProperty Name="menu_nombre" ColumnName="menu_nombre" />
+                <ScalarProperty Name="menu_descripcion" ColumnName="menu_descripcion" />
+                <ScalarProperty Name="menu_url" ColumnName="menu_url" />
+                <ScalarProperty Name="menu_imagen" ColumnName="menu_imagen" />
+                <ScalarProperty Name="menu_orden" ColumnName="menu_orden" />
+                <ScalarProperty Name="menu_padre" ColumnName="menu_padre" />
+                <ScalarProperty Name="menu_habilitado" ColumnName="menu_habilitado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaqueteVentas">
+            <EntityTypeMapping TypeName="GiftCardEntities.PaqueteVenta">
+              <MappingFragment StoreEntitySet="PaqueteVenta">
+                <ScalarProperty Name="paqueteventa_Id" ColumnName="paqueteventa_Id" />
+                <ScalarProperty Name="tarjeta_id" ColumnName="tarjeta_id" />
+                <ScalarProperty Name="saledate" ColumnName="saledate" />
+                <ScalarProperty Name="partner_id" ColumnName="partner_id" />
+                <ScalarProperty Name="site_code" ColumnName="site_code" />
+                <ScalarProperty Name="pos_id" ColumnName="pos_id" />
+                <ScalarProperty Name="saledate_close" ColumnName="saledate_close" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaqueteVentaDetalles">
+            <EntityTypeMapping TypeName="GiftCardEntities.PaqueteVentaDetalle">
+              <MappingFragment StoreEntitySet="PaqueteVentaDetalle">
+                <ScalarProperty Name="paqueteventa_Id" ColumnName="paqueteventa_Id" />
+                <ScalarProperty Name="paqueteventadetalle_id" ColumnName="paqueteventadetalle_id" />
+                <ScalarProperty Name="paqueteventadetalle_part_number" ColumnName="paqueteventadetalle_part_number" />
+                <ScalarProperty Name="paqueteventadetalle_cantidad" ColumnName="paqueteventadetalle_cantidad" />
+                <ScalarProperty Name="partner_id" ColumnName="partner_id" />
+                <ScalarProperty Name="saledate" ColumnName="saledate" />
+                <ScalarProperty Name="site_code" ColumnName="site_code" />
+                <ScalarProperty Name="pos_id" ColumnName="pos_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfiles">
+            <EntityTypeMapping TypeName="GiftCardEntities.Perfile">
+              <MappingFragment StoreEntitySet="Perfiles">
+                <ScalarProperty Name="perfil_id" ColumnName="perfil_id" />
+                <ScalarProperty Name="perfil_nombre" ColumnName="perfil_nombre" />
+                <ScalarProperty Name="special" ColumnName="special" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerfilesDetails">
+            <EntityTypeMapping TypeName="GiftCardEntities.PerfilesDetail">
+              <MappingFragment StoreEntitySet="PerfilesDetail">
+                <ScalarProperty Name="perfildetail_id" ColumnName="perfildetail_id" />
+                <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+                <ScalarProperty Name="perfil_id" ColumnName="perfil_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sites">
+            <EntityTypeMapping TypeName="GiftCardEntities.Site">
+              <MappingFragment StoreEntitySet="Sites">
+                <ScalarProperty Name="site_id" ColumnName="site_id" />
+                <ScalarProperty Name="site_code" ColumnName="site_code" />
+                <ScalarProperty Name="site_desc" ColumnName="site_desc" />
+                <ScalarProperty Name="site_conexion" ColumnName="site_conexion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TARJETA_CARGA_MASIVA_TEMP">
+            <EntityTypeMapping TypeName="GiftCardEntities.TARJETA_CARGA_MASIVA_TEMP">
+              <MappingFragment StoreEntitySet="TARJETA_CARGA_MASIVA_TEMP">
+                <ScalarProperty Name="tarjeta_id" ColumnName="tarjeta_id" />
+                <ScalarProperty Name="no_empleado" ColumnName="no_empleado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="No_Tarjeta" ColumnName="No_Tarjeta" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="partner_id" ColumnName="partner_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TarjetaDescuentos">
+            <EntityTypeMapping TypeName="GiftCardEntities.TarjetaDescuento">
+              <MappingFragment StoreEntitySet="TarjetaDescuentos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NumeroEmpleado" ColumnName="NumeroEmpleado" />
+                <ScalarProperty Name="NumeroTarjeta" ColumnName="NumeroTarjeta" />
+                <ScalarProperty Name="Cliente_Id" ColumnName="Cliente_Id" />
+                <ScalarProperty Name="CodigoVerificador" ColumnName="CodigoVerificador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TarjetaPackages">
+            <EntityTypeMapping TypeName="GiftCardEntities.TarjetaPackage">
+              <MappingFragment StoreEntitySet="TarjetaPackages">
+                <ScalarProperty Name="Tarjeta_id" ColumnName="Tarjeta_id" />
+                <ScalarProperty Name="tarjetapackage_id" ColumnName="tarjetapackage_id" />
+                <ScalarProperty Name="package_id" ColumnName="package_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TarjetasSaldoAnteriors">
+            <EntityTypeMapping TypeName="GiftCardEntities.TarjetasSaldoAnterior">
+              <MappingFragment StoreEntitySet="TarjetasSaldoAnterior">
+                <ScalarProperty Name="tarjeta_id" ColumnName="tarjeta_id" />
+                <ScalarProperty Name="tarjeta_numero" ColumnName="tarjeta_numero" />
+                <ScalarProperty Name="tarjeta_monto_original" ColumnName="tarjeta_monto_original" />
+                <ScalarProperty Name="tarjeta_referencia" ColumnName="tarjeta_referencia" />
+                <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="tarjeta_tipo" ColumnName="tarjeta_tipo" />
+                <ScalarProperty Name="tarjeta_dv" ColumnName="tarjeta_dv" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="fecha_eliminacion" ColumnName="fecha_eliminacion" />
+                <ScalarProperty Name="saldo_final" ColumnName="saldo_final" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="GiftCardEntities.Usuario">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
+                <ScalarProperty Name="usuario_password" ColumnName="usuario_password" />
+                <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
+                <ScalarProperty Name="perfil_id" ColumnName="perfil_id" />
+                <ScalarProperty Name="usuario_enabled" ColumnName="usuario_enabled" />
+                <ScalarProperty Name="cliente_interno" ColumnName="cliente_interno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

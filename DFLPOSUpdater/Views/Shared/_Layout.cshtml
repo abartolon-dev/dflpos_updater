@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Administración POS | @ViewBag.Title</title>
+    <link rel="shortcut icon" href="/Content/img/logoflorido.ico" type="image/x-icon" sizes="16x16">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href="~/" />
+
+    <!-- Primary vendor style -->
+    @Styles.Render("~/bundles/font-awesome/css")
+    @Styles.Render("~/bundles/animate/css")
+    @Styles.Render("~/bundles/bootstrap/css")
+    @Styles.Render("~/bundles/peicon7stroke/css")
+    @Styles.Render("~/bundles/datatables/css")
+    @Styles.Render("~/bundles/select2/css")
+    @Styles.Render("~/bundles/datepicker/css")
+    @Styles.Render("~/bundles/calculator/css")
+    @Scripts.Render("~/bundles/jquery/js")
+
+    <!-- Add local styles, mostly for plugins css file -->
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
+
+    <!-- Primary HOMER style -->
+    @Styles.Render("~/bundles/homer/css")
+
+    @{
+        var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+        var actionName = this.ViewContext.RouteData.Values["action"]
+                           .ToString()
+                           .Substring(0, 3)
+                           .ToLower();
+
+    }
+
+    <style>
+        .modal-full {
+            min-width: 100%;
+            margin: 0;
+        }
+
+            .modal-full .modal-content {
+                min-height: 100vh;
+            }
+
+
+        .fab-container-g {
+            position: fixed !important;
+            bottom: 50px !important;
+            right: 50px !important;
+            z-index: 999 !important;
+            cursor: pointer !important;
+        }
+
+        .fab-icon-holder-g {
+            width: 50px !important;
+            height: 50px !important;
+            border-radius: 100% !important;
+            background: #224191 !important;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2) !important;
+        }
+
+            .fab-icon-holder-g:hover {
+                opacity: 0.8 !important;
+            }
+
+            .fab-icon-holder-g i {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 100% !important;
+                font-size: 25px !important;
+                color: #ffffff !important;
+            }
+
+        .fab-g {
+            width: 60px !important;
+            height: 60px !important;
+            background: #224191 !important;
+        }
+
+        .fab-options-g {
+            list-style-type: none !important;
+            margin: 0 !important;
+            position: absolute !important;
+            bottom: 70px !important;
+            right: 0 !important;
+            opacity: 0 !important;
+            transition: all 0.3s ease !important;
+            transform: scale(0) !important;
+            transform-origin: 85% bottom !important;
+        }
+
+            .fab-g:hover + .fab-options-g, .fab-options-g:hover {
+                opacity: 1 !important;
+                transform: scale(1) !important;
+            }
+
+            .fab-options-g li {
+                display: flex !important;
+                justify-content: flex-end !important;
+                padding: 5px !important;
+            }
+
+        .fab-label-g {
+            padding: 2px 5px !important;
+            align-self: center !important;
+            user-select: none !important;
+            white-space: nowrap !important;
+            border-radius: 3px !important;
+            font-size: 16px !important;
+            background: #666666 !important;
+            color: #ffffff !important;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2) !important;
+            margin-right: 10px !important;
+        }
+
+        #search_containerNoRepeat {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            top: 100%;
+            left: 0;
+            margin-top: 5px;
+            display: none;
+        }
+
+            #search_containerNoRepeat.show {
+                display: block;
+            }
+
+        .search-result {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+            .search-result:last-child {
+                border-bottom: none;
+            }
+    </style>
+
+
+</head>
+<body class="@Html.PageClass() tooltip-demo sidebar-scroll fixed-navbar">
+    <!-- Simple splash screen-->
+    <div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>Espere Por Favor..</h1><p>Su petición se está procesando. </p><div class="spinner"> <div class="rect1"></div> <div class="rect2"></div> <div class="rect3"></div> <div class="rect4"></div> <div class="rect5"></div> </div> </div> </div>
+    @if (Request.Browser.Browser.ToUpper().Contains("INTERNETEXPLORER"))
+    {<p class="alert alert-danger">Usted está usando un navegador <strong>EXPLORER</strong>.  Le sugerimos utilizar cualquiera de los siguientes navegadores <strong>(Chrome,Opera)</strong>.</p>}
+    <!-- Header -->
+    <div id="header">
+        @Html.Partial("_Header")
+    </div>
+
+    <!-- Navigation -->
+    <aside id="menu" style="position: fixed;
+    width: 205px;
+    overflow-y: scroll;">
+        @{Html.RenderAction("Menu", "Home");}
+    </aside>
+
+    <!-- Main view  -->
+    <div id="wrapper">
+        @RenderBody()
+
+        <!-- Muestra Sidebar (tipo de cambio)-->
+        @{Html.RenderAction("_Right_Sidebar", "Home");}
+
+        <!-- Footer-->
+        @{Html.RenderAction("_Footer", "Home");}
+    </div>
+
+  
+
+    <!-- Section for main scripts render -->
+   @* @Scripts.Render("~/bundles/jquery/js")*@
+    @Scripts.Render("~/bundles/jqueryui/js")
+    @Scripts.Render("~/bundles/bootstrap/js")
+    @Scripts.Render("~/bundles/homer/js")
+    @Scripts.Render("~/bundles/validation/js")
+    @Scripts.Render("~/bundles/axios/js")
+    @Scripts.Render("~/bundles/select2/js")
+    @Scripts.Render("~/bundles/datatables/js")
+    @Scripts.Render("~/bundles/datatablesBootstrap/js")
+    @Scripts.Render("~/bundles/datatablesPlugins/js")
+    @Scripts.Render("~/bundles/datepicker/js")
+    @Scripts.Render("~/bundles/Layout/js")
+    @Scripts.Render("~/bundles/GenericInputCurrency/js")
+    @Scripts.Render("~/bundles/GenericCallPartViews/js")
+   
+
+    <!-- Handler for local scripts -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/Content/img/logoflorido.ico" type="image/x-icon" sizes="16x16">
+    <!-- Page title -->
+    <title>Administración POS</title>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />-->
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="~/vendor/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/vendor/metisMenu/dist/metisMenu.css" />
+    <link rel="stylesheet" href="~/vendor/animate.css/animate.css" />
+    <link rel="stylesheet" href="~/vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/vendor/toastr/build/toastr.min.css" />
+    <!-- App styles -->
+    <link rel="stylesheet" href="~/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="~/fonts/pe-icon-7-stroke/css/helper.css" />
+    <link rel="stylesheet" href="~/styles/style.css">
+    <link rel="stylesheet" href="~/styles/static_custom.css">
+    @Styles.Render("~/vendor/select2-3.5.2/select2.css")
+    @Styles.Render("~/vendor/select2-bootstrap/select2-bootstrap.css")
+
+
+</head>
+<body class="blank tooltip-demo">
+    @RenderBody()
+    <script src="~/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="~/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/vendor/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/vendor/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="~/vendor/iCheck/icheck.min.js"></script>
+    <script src="~/vendor/sparkline/index.js"></script>
+    <script src="~/vendor/toastr/build/toastr.min.js"></script>
+    <script src="~/vendor/jquery-validation/jquery.validate.min.js"></script>
+    @Scripts.Render("~/vendor/select2-3.5.2/select2.min.js")
+    <!-- App scripts -->
+    <script src="~/Scripts/homer.js"></script>
+    <script>
+        //comentario
+        @*$(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "@(Url.Action("SiteList", "Home"))",
+                data: "",
+            success: function (returndates) {
+                console.log(returndates)
+                var option = "";
+                $.each(returndates,function (index, value) {
+                    option += '<option value=' + value.ip_address + '>' + value.site_name + '</option>'
+                    console.log(index + " " + value.ip_address);
+                })
+                $("#Combo").html(option);
+            },
+            error: function (returndates) {
+                toastr.error('Alerta - Error inesperado contactar a sistemas.');
+                EndLoading();
+            }
+        });
+        });*@
+        $("#Combo").select2();
+        function selectIp() {
+                            StartLoading()
+            if ($("#Combo").val() == window.location.host)
+                window.location.href = 'http://' + window.location.host + '/Home/Login';
+            else {
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://" + $("#Combo").val() + "/Home/IsActive",
+                    data: "",
+                    success: function (returndates) {
+                        EndLoading()
+                        window.location.href = 'http://' + $("#Combo").val() + '/Home/Login';
+                    },
+                    error: function (returndates) {
+                        EndLoading()
+                        window.location.href = 'http://' + window.location.host + '/Home/Login';
+                    }
+                });
+            }
+        }
+
+    </script>
+</body>
+</html>
+
+

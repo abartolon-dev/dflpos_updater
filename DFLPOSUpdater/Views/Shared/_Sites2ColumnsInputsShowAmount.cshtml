@@ -1,0 +1,64 @@
+﻿
+<div class="hpanel" id="divCheckCollapsed">
+    <div class="panel-heading hbuilt">
+        <div class="pull-right" id="DivDistrictSite">
+            @foreach (var item in @Model.Districts)
+            {
+                <a class="btn btn-default btn-xs" id="@item.Trim()" >@item.Trim()</a>
+            }
+            <a class="showhide">  <i class="fa fa-chevron-up"></i></a>
+        </div>
+        <i class="fa fa-shopping-cart"></i> SELECCCIONAR TIENDAS
+    </div>
+    <div class="panel-body">
+        <div class="RowCheck row" id="CheckBoxesSites">
+            <div class="col-lg-6 border-right">
+                <ul id="CheckStores1">
+                    <li  id="label_All">
+                        <input type="checkbox" id="All" name="All" class="i-checks" disabled><label style="font-size: 12px; font-weight: normal;"> TODAS LAS TIENDAS </label>
+                    </li>
+                    @{
+                        int tab_index_input = 1;
+                    }
+                    @for (int countCheckSites = 0; countCheckSites < Model.ListPosition.first_column_for_column_2_with_inputs; countCheckSites++)
+                    {
+                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" disabled class="i-checks">
+                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")
+                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                    <input type="text" tabindex="@tab_index_input" id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right" autocomplete="off" disabled>
+                                </label>
+                            </label>
+                        </li>
+                        tab_index_input++;
+                    }
+                </ul>
+            </div>
+            <div class="col-lg-6 border-right">
+                <ul id="CheckStores2">
+                    @for (int countCheckSites = Model.ListPosition.first_column_for_column_2_with_inputs; countCheckSites < Model.ListPosition.all_sites_actives; countCheckSites++)
+                    {
+                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" disabled class="i-checks">
+                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")
+                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                    <input type="text" tabindex="@tab_index_input" id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right" autocomplete="off" disabled>
+                                </label>
+                            </label>
+                        </li>
+                        tab_index_input++;
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer clearfix">
+        <p class="pull-left" id="count_all_sites_text">Se han seleccionado 0 sucursales.</p>
+        <p class="pull-right" id="amount_all_sites_text">El monto total es <span class="text-success">$0.00</span> .</p>
+    </div>
+</div>
+@Html.Hidden("count_div_panel_checkbox", 0)
+@Html.Hidden("div_panel_inputs", 1)
+@Html.Hidden("div_panel_percentage", 0)

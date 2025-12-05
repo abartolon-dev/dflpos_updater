@@ -1,0 +1,483 @@
+﻿<div class="col-lg-12">
+    <div class="hpanel" id="divCheckCollapsed">
+        <div class="panel-heading hbuilt">
+            <div class="pull-right" id="DivDistrictSite">
+                @foreach (var item in @Model.Districts)
+                {
+                    <a class="btn btn-default btn-xs" id="@item.Trim()" onclick="CheckSitesDistrict(this.id);">@item.Trim()</a>
+                }
+                <a class="showhide">  <i class="fa fa-chevron-up"></i></a>
+            </div>
+            <i class="fa fa-shopping-cart"></i> SELECCCIONAR TIENDAS
+        </div>
+        <div class="panel-body">
+            @{
+                int count_panel = 1;
+                int inc = -1;
+                int incMultiplicacion = 9;
+                int name_div_panel = 1;
+                bool insert_new_panel = false;
+                int tab_index_input = 1;
+
+            }
+            <div class="RowCheck row" id="CheckBoxesSites">
+                <div id="content_checks_@name_div_panel.ToString()">
+                    @while (count_panel <= 2)
+                    {
+                        <div class="col-lg-6 border-right">
+                            <ul>
+                                @if (inc == -1)
+                                {
+                                    <li id="label_All">
+                                        <input type="checkbox" id="All" name="All" class="i-checks" onclick="CheckSitesAll()"><label style="font-size: 12px; font-weight: normal;"> TODAS LAS TIENDAS </label>
+                                    </li>
+                                    inc = 0;
+                                }
+                                @if (incMultiplicacion > Model.ListPosition.all_sites_actives) { incMultiplicacion = Model.ListPosition.all_sites_actives; }
+                                @for (int countCheckSites = inc; countCheckSites < incMultiplicacion; countCheckSites++)
+                                {
+                                    <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                                        <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();">
+                                        <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                            @Model.Sites[countCheckSites].SiteName.Trim()
+                                            <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                                <input type="text" tabindex="@tab_index_input" id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" onchange="CalculateTotalAmount(this.id)" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right Decimal" autocomplete="off" disabled>
+                                            </label>
+                                        </label>
+                                    </li>
+                                    tab_index_input++;
+                                }
+                                @if (incMultiplicacion == 9)
+                                {
+                                    incMultiplicacion = 9;
+                                }
+                                @{
+                                    inc = incMultiplicacion;
+                                    incMultiplicacion = incMultiplicacion + 10;
+                                    count_panel++;
+                                }
+                                @if (count_panel == 2)
+                                {
+                                    if (inc < Model.ListPosition.all_sites_actives)
+                                    {
+                                        insert_new_panel = true;
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+                @if (insert_new_panel)
+                {
+                    name_div_panel = 2;
+                    <div id="content_checks_@name_div_panel.ToString()" hidden>
+                        @while (count_panel <= 4)
+                        {
+                            <div class="col-lg-6 border-right">
+                                <ul id="CheckStores_@name_div_panel.ToString()">
+                                    @if (incMultiplicacion > Model.ListPosition.all_sites_actives) { incMultiplicacion = Model.ListPosition.all_sites_actives; }
+                                    @for (int countCheckSites = inc; countCheckSites < incMultiplicacion; countCheckSites++)
+                                    {
+                                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();">
+                                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                                @Model.Sites[countCheckSites].SiteName.Trim()
+                                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                                    <input type="text" tabindex="@tab_index_input" id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" onchange="CalculateTotalAmount(this.id)" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right Decimal" autocomplete="off" disabled>
+                                                </label>
+                                            </label>
+                                        </li>
+                                        tab_index_input++;
+                                    }
+                                    @{
+                                        inc = incMultiplicacion;
+                                        incMultiplicacion = incMultiplicacion + 10;
+                                        count_panel++;
+                                    }
+                                </ul>
+                            </div>
+                            if (count_panel == 4)
+                            {
+                                if (inc < Model.ListPosition.all_sites_actives)
+                                {
+                                    insert_new_panel = true;
+                                }
+                                else
+                                {
+                                    insert_new_panel = false;
+                                }
+                            }
+                        }
+                    </div>
+                }
+                @if (insert_new_panel)
+                {
+                    name_div_panel = 3;
+                    <div id="content_checks_@name_div_panel.ToString()" hidden>
+                        @while (count_panel <= 6)
+                        {
+                            <div class="col-lg-6 border-right">
+                                <ul id="CheckStores_@name_div_panel.ToString()">
+                                    @if (incMultiplicacion > Model.ListPosition.all_sites_actives) { incMultiplicacion = Model.ListPosition.all_sites_actives; }
+                                    @for (int countCheckSites = inc; countCheckSites < incMultiplicacion; countCheckSites++)
+                                    {
+                                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();">
+                                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                                @Model.Sites[countCheckSites].SiteName.Trim()
+                                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                                    <input type="text" tabindex="@tab_index_input" id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" onchange="CalculateTotalAmount(this.id)" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right Decimal" autocomplete="off" disabled>
+                                                </label>
+                                            </label>
+                                        </li>
+                                        tab_index_input++;
+                                    }
+                                    @{
+                                        inc = incMultiplicacion;
+                                        incMultiplicacion = incMultiplicacion + 10;
+                                        count_panel++;
+                                    }
+                                </ul>
+                            </div>
+                            if (count_panel == 6)
+                            {
+                                if (inc < Model.ListPosition.all_sites_actives)
+                                {
+                                    insert_new_panel = true;
+                                }
+                                else
+                                {
+                                    insert_new_panel = false;
+                                }
+                            }
+                        }
+                    </div>
+                }
+                @if (insert_new_panel)
+                {
+                    name_div_panel = 4;
+                    <div id="content_checks_@name_div_panel.ToString()" hidden>
+                        @while (count_panel <= 8)
+                        {
+                            <div class="col-lg-6 border-right">
+                                <ul id="CheckStores_@name_div_panel.ToString()">
+                                    @if (incMultiplicacion > Model.ListPosition.all_sites_actives) { incMultiplicacion = Model.ListPosition.all_sites_actives; }
+                                    @for (int countCheckSites = inc; countCheckSites < incMultiplicacion; countCheckSites++)
+                                    {
+                                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();">
+                                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                                @Model.Sites[countCheckSites].SiteName.Trim()
+                                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                                    <input type="text"  tabindex="@tab_index_input"  id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" onchange="CalculateTotalAmount(this.id)" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right Decimal" autocomplete="off" disabled>
+                                                </label>
+                                            </label>
+                                        </li>
+                                        tab_index_input++;
+                                    }
+                                    @{
+                                        inc = incMultiplicacion;
+                                        incMultiplicacion = incMultiplicacion + 10;
+                                        count_panel++;
+                                    }
+                                </ul>
+                            </div>
+                            if (count_panel == 8)
+                            {
+                                if (inc < Model.ListPosition.all_sites_actives)
+                                {
+                                    insert_new_panel = true;
+                                }
+                                else
+                                {
+                                    insert_new_panel = false;
+                                }
+                            }
+                        }
+                    </div>
+                }
+                @if (insert_new_panel)
+                {
+                    name_div_panel = 5;
+                    <div id="content_checks_@name_div_panel.ToString()" hidden>
+                        @while (count_panel <= 10)
+                        {
+                            <div class="col-lg-6 border-right">
+                                <ul id="CheckStores_@name_div_panel.ToString()">
+                                    @if (incMultiplicacion > Model.ListPosition.all_sites_actives) { incMultiplicacion = Model.ListPosition.all_sites_actives; }
+                                    @for (int countCheckSites = inc; countCheckSites < incMultiplicacion; countCheckSites++)
+                                    {
+                                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();">
+                                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                                @Model.Sites[countCheckSites].SiteName.Trim()
+                                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                                    <input type="text"  tabindex="@tab_index_input"  id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" onchange="CalculateTotalAmount(this.id)" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right Decimal" autocomplete="off" disabled>
+                                                </label>
+                                            </label>
+                                        </li>
+                                        tab_index_input++;
+                                    }
+                                    @{
+                                        inc = incMultiplicacion;
+                                        incMultiplicacion = incMultiplicacion + 10;
+                                        count_panel++;
+                                    }
+                                </ul>
+                            </div>
+                            if (count_panel == 10)
+                            {
+                                if (inc < Model.ListPosition.all_sites_actives)
+                                {
+                                    insert_new_panel = true;
+                                }
+                                else
+                                {
+                                    insert_new_panel = false;
+                                }
+                            }
+                        }
+                    </div>
+                }
+                @if (insert_new_panel)
+                {
+                    name_div_panel = 6;
+                    <div id="content_checks_@name_div_panel.ToString()" hidden>
+                        @while (count_panel <= 12)
+                        {
+                            <div class="col-lg-6 border-right">
+                                <ul id="CheckStores_@name_div_panel.ToString()">
+                                    @if (incMultiplicacion > Model.ListPosition.all_sites_actives) { incMultiplicacion = Model.ListPosition.all_sites_actives; }
+                                    @for (int countCheckSites = inc; countCheckSites < incMultiplicacion; countCheckSites++)
+                                    {
+                                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();">
+                                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                                @Model.Sites[countCheckSites].SiteName.Trim()
+                                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                                    <input type="text"  tabindex="@tab_index_input"  id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" onchange="CalculateTotalAmount(this.id)" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right Decimal" autocomplete="off" disabled>
+                                                </label>
+                                            </label>
+                                        </li>
+                                        tab_index_input++;
+                                    }
+                                    @{
+                                        inc = incMultiplicacion;
+                                        incMultiplicacion = incMultiplicacion + 10;
+                                        count_panel++;
+                                    }
+                                </ul>
+                            </div>
+                            if (count_panel == 12)
+                            {
+                                if (inc < Model.ListPosition.all_sites_actives)
+                                {
+                                    insert_new_panel = true;
+                                }
+                                else
+                                {
+                                    insert_new_panel = false;
+                                }
+                            }
+                        }
+                    </div>
+                }
+                @if (insert_new_panel)
+                {
+                    name_div_panel = 7;
+                    <div id="content_checks_@name_div_panel.ToString()" hidden>
+                        @while (count_panel <= 14)
+                        {
+                            <div class="col-lg-6 border-right">
+                                <ul id="CheckStores_@name_div_panel.ToString()">
+                                    @if (incMultiplicacion > Model.ListPosition.all_sites_actives) { incMultiplicacion = Model.ListPosition.all_sites_actives; }
+                                    @for (int countCheckSites = inc; countCheckSites < incMultiplicacion; countCheckSites++)
+                                    {
+                                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();">
+                                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                                @Model.Sites[countCheckSites].SiteName.Trim()
+                                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                                    <input type="text"   tabindex="@tab_index_input"  id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" onchange="CalculateTotalAmount(this.id)" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right Decimal" autocomplete="off" disabled>
+                                                </label>
+                                            </label>
+                                        </li>
+                                        tab_index_input++;
+                                    }
+                                    @{
+                                        inc = incMultiplicacion;
+                                        incMultiplicacion = incMultiplicacion + 10;
+                                        count_panel++;
+                                    }
+                                </ul>
+                            </div>
+                            if (count_panel == 14)
+                            {
+                                if (inc < Model.ListPosition.all_sites_actives)
+                                {
+                                    insert_new_panel = true;
+                                }
+                                else
+                                {
+                                    insert_new_panel = false;
+                                }
+                            }
+                        }
+                    </div>
+                }
+                @if (insert_new_panel)
+                {
+                    name_div_panel = 8;
+                    <div id="content_checks_@name_div_panel.ToString()" hidden>
+                        @while (count_panel <= 16)
+                        {
+                            <div class="col-lg-6 border-right">
+                                <ul id="CheckStores_@name_div_panel.ToString()">
+                                    @if (incMultiplicacion > Model.ListPosition.all_sites_actives) { incMultiplicacion = Model.ListPosition.all_sites_actives; }
+                                    @for (int countCheckSites = inc; countCheckSites < incMultiplicacion; countCheckSites++)
+                                    {
+                                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();">
+                                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                                @Model.Sites[countCheckSites].SiteName.Trim()
+                                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                                    <input type="text"  tabindex="@tab_index_input"  id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" onchange="CalculateTotalAmount(this.id)" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right Decimal" autocomplete="off" disabled>
+                                                </label>
+                                            </label>
+                                        </li>
+                                        tab_index_input++;
+                                    }
+                                    @{
+                                        inc = incMultiplicacion;
+                                        incMultiplicacion = incMultiplicacion + 10;
+                                        count_panel++;
+                                    }
+                                </ul>
+                            </div>
+                            if (count_panel == 16)
+                            {
+                                if (inc < Model.ListPosition.all_sites_actives)
+                                {
+                                    insert_new_panel = true;
+                                }
+                                else
+                                {
+                                    insert_new_panel = false;
+                                }
+                            }
+                        }
+                    </div>
+                }
+                @if (insert_new_panel)
+                {
+                    name_div_panel = 9;
+                    <div id="content_checks_@name_div_panel.ToString()" hidden>
+                        @while (count_panel <= 18)
+                        {
+                            <div class="col-lg-6 border-right">
+                                <ul id="CheckStores_@name_div_panel.ToString()">
+                                    @if (incMultiplicacion > Model.ListPosition.all_sites_actives) { incMultiplicacion = Model.ListPosition.all_sites_actives; }
+                                    @for (int countCheckSites = inc; countCheckSites < incMultiplicacion; countCheckSites++)
+                                    {
+                                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();">
+                                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                                @Model.Sites[countCheckSites].SiteName.Trim()
+                                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                                    <input type="text"  tabindex="@tab_index_input"  id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" onchange="CalculateTotalAmount(this.id)" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right Decimal" autocomplete="off" disabled>
+                                                </label>
+                                            </label>
+                                        </li>
+                                        tab_index_input++;
+                                    }
+                                    @{
+                                        inc = incMultiplicacion;
+                                        incMultiplicacion = incMultiplicacion + 10;
+                                        count_panel++;
+                                    }
+                                </ul>
+                            </div>
+                            if (count_panel == 18)
+                            {
+                                if (inc < Model.ListPosition.all_sites_actives)
+                                {
+                                    insert_new_panel = true;
+                                }
+                                else
+                                {
+                                    insert_new_panel = false;
+                                }
+                            }
+                        }
+                    </div>
+                }
+                @if (insert_new_panel)
+                {
+                    name_div_panel = 10;
+                    <div id="content_checks_@name_div_panel.ToString()" hidden>
+                        @while (count_panel <= 20)
+                        {
+                            <div class="col-lg-6 border-right">
+                                <ul id="CheckStores_@name_div_panel.ToString()">
+                                    @if (incMultiplicacion > Model.ListPosition.all_sites_actives) { incMultiplicacion = Model.ListPosition.all_sites_actives; }
+                                    @for (int countCheckSites = inc; countCheckSites < incMultiplicacion; countCheckSites++)
+                                    {
+                                        <li id="label_@Model.Sites[countCheckSites].SiteCode.Trim()" style="width:100%;margin-top:20px">
+                                            <input type="checkbox" id="@Model.Sites[countCheckSites].SiteCode.Trim()" name="@Model.Sites[countCheckSites].District" class="i-checks" onclick="ValidateSitesCurrentDisable(this.id);CheckValidateAll();">
+                                            <label id="label_txt_@Model.Sites[countCheckSites].SiteCode.Trim()" style="font-weight: normal; width: 90%; margin-top: 10px; display: inline;">
+                                                @Model.Sites[countCheckSites].SiteName.Trim()
+                                                <label id="label_txt_inside_@Model.Sites[countCheckSites].SiteCode.Trim()" class="pull-right" style="font-weight: normal; width: 50%;">
+                                                    <input type="text"  tabindex="@tab_index_input"  id="input_amount_@Model.Sites[countCheckSites].SiteCode.Trim()" onchange="CalculateTotalAmount(this.id)" placeholder="Monto para @Model.Sites[countCheckSites].SiteName.Trim().Replace("FLORIDO", "")" class="form-control pull-right Decimal" autocomplete="off" disabled>
+                                                </label>
+                                            </label>
+                                        </li>
+                                        tab_index_input++;
+                                    }
+                                    @{
+                                        inc = incMultiplicacion;
+                                        incMultiplicacion = incMultiplicacion + 10;
+                                        count_panel++;
+                                    }
+                                </ul>
+                            </div>
+                            if (count_panel == 20)
+                            {
+                                if (inc < Model.ListPosition.all_sites_actives)
+                                {
+                                    insert_new_panel = true;
+                                }
+                                else
+                                {
+                                    insert_new_panel = false;
+                                }
+                            }
+                        }
+                    </div>
+                }
+                <div class="row text-center btn-pagination-group" id="group_pagination" style="margin-top:520px">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" style="outline: none;" onclick="ChangeViewCheckBoxPreNex(false)"><i class="fa fa-chevron-left"></i></button>
+                        <button class="btn btn-default active" style="outline: none;" hidden onclick="ChangeViewCheckBox(1)" id="btnCheckbox_pagination_1">1</button>
+                        <button class="btn btn-default" style="outline: none;" hidden onclick="ChangeViewCheckBox(2)" id="btnCheckbox_pagination_2">2</button>
+                        <button class="btn btn-default" style="outline: none;" hidden onclick="ChangeViewCheckBox(3)" id="btnCheckbox_pagination_3">3</button>
+                        <button class="btn btn-default" style="outline: none;" hidden onclick="ChangeViewCheckBox(4)" id="btnCheckbox_pagination_4">4</button>
+                        <button class="btn btn-default" style="outline: none;" hidden onclick="ChangeViewCheckBox(5)" id="btnCheckbox_pagination_5">5</button>
+                        <button class="btn btn-default" style="outline: none;" hidden onclick="ChangeViewCheckBox(6)" id="btnCheckbox_pagination_6">6</button>
+                        <button class="btn btn-default" style="outline: none;" hidden onclick="ChangeViewCheckBox(7)" id="btnCheckbox_pagination_7">7</button>
+                        <button class="btn btn-default" style="outline: none;" hidden onclick="ChangeViewCheckBox(8)" id="btnCheckbox_pagination_8">8</button>
+                        <button class="btn btn-default" style="outline: none;" hidden onclick="ChangeViewCheckBox(9)" id="btnCheckbox_pagination_9">10</button>
+                        <button class="btn btn-default" style="outline: none;" hidden onclick="ChangeViewCheckBox(10)" id="btnCheckbox_pagination_10">10</button>
+                        <button type="button" class="btn btn-default" style="outline: none;" onclick="ChangeViewCheckBoxPreNex(true)"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer clearfix">
+            <p class="pull-left" id="count_all_sites_text">Se han seleccionado 0 sucursales.</p>
+            <p class="pull-right" id="amount_all_sites_text">El monto total es <span class="text-success">$0.00</span> .</p>
+        </div>
+    </div>
+</div>
+@Html.Hidden("count_div_panel_checkbox", name_div_panel)
+@Html.Hidden("div_panel_inputs", 1)
+@Html.Hidden("div_panel_percentage", 0)

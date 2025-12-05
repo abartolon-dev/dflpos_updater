@@ -1,0 +1,138 @@
+﻿@model DFLPOSUpdater.ViewModels.Distributions.DistributionViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@*@Styles.Render("~/bundles/datatables/css")*@
+
+<div class="normalheader transition animated fadeIn">
+    <div class="hpanel">
+        <div class="panel-body">
+            <a class="small-header-action" href="">
+                <div class="clip-header">
+                    <i id="fa" class="fa fa-arrow-up"></i>
+                </div>
+            </a>
+            <div class="font-light m-b-xs text-center">
+                <h2>
+                    Bienvenido al Sistema de Administración POS
+                </h2>
+                <small class="text-primary text-center">Sistema administración de actualizacion de punto de venta para las sucursales de Dsitribuidora el Florido</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="hpanel stats">
+                <div class="panel-heading">
+                    <div class="panel-tools">
+                        <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        <a class="closebox"><i class="fa fa-times"></i></a>
+                    </div>
+                    Ulima version
+                </div>
+                <div class="panel-body list">
+                    <div class="stats-title pull-left">
+                        <h3 class="no-margins font-extra-bold text-success">@Model.VersionNumber</h3>
+                    </div>
+                    <div class="stats-icon pull-right">
+                        <i class="pe-7s-science fa-4x"></i>
+                    </div>
+                    <div class="m-t-xl">
+                        <span class="font-bold no-margins">
+                            Notas de la versión
+                        </span>
+                        <br>
+                        <small>
+                            @Model.VersionDescription
+                        </small>
+                    </div>
+                    @*<div class="row m-t-md">
+                        <div class="col-lg-12">                                                      
+                            <div id="div_quantity_success" class="font-bold"></div>
+                        </div>                    
+                    </div>*@
+                   
+                </div>
+                <div class="panel-footer" id="div_quantity_success">                  
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="hpanel">
+                <div class="panel-heading">
+                    <div class="panel-tools">
+                        <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        <a class="closebox"><i class="fa fa-times"></i></a>
+                    </div>
+                    Actualización activa recientemente
+                </div>
+                <div class="panel-body list">
+                    <div class="table-responsive">
+                        <table id="table_current_distribution" class="table table-striped table-bordered table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Id Sucursal</th>
+                                    <th>Sucursales Actualizadas</th>
+                                    <th>Mensaje</th>
+                                    <th>Fecha</th>
+                                    <th>Estatus</th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="hpanel">
+                <div class="panel-heading">
+                    <div class="panel-tools">
+                        <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        <a class="closebox"><i class="fa fa-times"></i></a>
+                    </div>
+                    Versiones
+                </div>
+                <div class="panel-body list">
+                    @*<div class="pull-right">
+                            <a href="#" class="btn btn-xs btn-default">Today</a>
+                            <a href="#" class="btn btn-xs btn-default">Month</a>
+                        </div>
+                        <div class="panel-title">70 VERSIONES</div>*@
+                    @*<small class="fo">This is simple example</small>*@
+                    <div class="list-item-container">
+                        <div class="list-item">
+                            <h3 class="no-margins font-extra-bold text-success">1.1.9368.24528</h3>
+                            <small>Descuento empleado aplicable cada ultimo miercoles del mes. </small>
+                            <div class="pull-right font-bold">2025-08-26<i class="fa fa-level-up text-success"></i></div>
+                        </div>
+                        <div class="list-item">
+                            <h3 class="no-margins font-extra-bold text-color3">1.1.9354.30354</h3>
+                            <small>Corrección en visualización de total en devoluciones</small>
+                            <div class="pull-right font-bold">2025-08-14<i class="fa fa-level-down text-color3"></i></div>
+                        </div>
+                        <div class="list-item">
+                            <h3 class="no-margins font-extra-bold text-color3">1.1.9334.17455</h3>
+                            <small>Corrección de aplicación de promoción.</small>
+                            <div class="pull-right font-bold">2025-07-03<i class="fa fa-bolt text-color3"></i></div>
+                        </div>
+                        <div class="list-item">
+                            <h3 class="no-margins font-extra-bold text-color3">1.1.9313.27541</h3>
+                            <small>Venta de boletos festival el florido.</small>
+                            <div class="pull-right font-bold">2025-06-25<i class="fa fa-level-up text-color3"></i></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Hidden("model", Json.Encode(Model.DistributionCurrent))
+@section scripts {
+    @Scripts.Render("~/bundles/Index/js")
+}

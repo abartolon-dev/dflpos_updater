@@ -1,0 +1,116 @@
+﻿<footer class="footer">
+    <div class="pull-left">
+        2025 - @DateTime.Now.Year &copy; Distribuidora el Florido S.A. de C.V.
+    </div>
+    <span class="pull-right">
+        <div class="form-group" title="@ViewBag.MyPathInServer" data-placement="top" data-toggle="tooltip">
+            Florido Administración POS
+        </div>
+    </span>
+</footer>
+<div class="modal fade" id="PVMainModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header text-center">
+                <h4 class="modal-title" id="PVTitleMainModal"><i class="fa fa-newspaper-o"></i> Sucursales</h4>
+                <div class="hide" id="PVTitleMainModalDetail"><div class="text-left" style="font-size: 18px;"><img src="~/Content/img/logo florido azul.png" height="120" width="140"></div><div class="text-right" style="font-size: 18px;"><a href="http://10.20.10.37/BIDFL/" target="_blank"> • <i class="fa fa-group"></i> BIDFL </a><a href="http://10.11.0.10:30/" target="_blank"> • <i class="fa fa-dropbox"></i> W M S </a><a href="http://10.11.0.11:30/" target="_blank"> • <i class="fa fa-pagelines"></i> Mariscal </a> • <a href="http://10.11.0.10:40/" target="_blank"><i class="fa fa-credit-card-alt"></i> CochiCard </a> • <a href="http://10.11.0.26:40/" target="_blank"><i class="fa fa-stethoscope"></i> FloriFarmacias </a>  • <a href="http://10.10.32.57:26/" target="_blank"><i class="fa fa-medkit"></i> Labs Florido </a> <a href="https://elflorido.atlassian.net/servicedesk/customer/portal/6" target="_blank"> • <i class="fa fa-life-saver"></i> Mesa de Ayuda Florido  </a> <a href="https://elflorido.atlassian.net/servicedesk/customer/portal/7" target="_blank">  • <i class="fa fa-laptop"></i> Mesa de Ayuda Mantenimiento  </a></div></div>
+            </div>
+            <div class="modal-body">
+                <div id="PVContainerMainModal">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="PVFooterMainModal">
+                    <button type="button" id="PVbtnCloseMainModal" class="btn btn-default pull-left" onclick="CloseModalWithInPVOne('PVMainModal')"><i class="fa fa-close"></i> Cerrar</button>
+                    <button type="button" id="PVbtnSaveProcess" class="btn btn-success"><i class="fa fa-check"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade hmodal-info" id="ModalReloadLoginPV" tabindex="-1" role="dialog" style="display: none;" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-body">
+                <h1 class="text-center">
+                    <img src="~/Content/img/logo florido azul.png" height="120" width="140">
+                </h1>
+                <div class="form-group" title="Favor de introducir su usuario o número de empleado" data-toggle="tooltip" data-placement="left">
+                    <label class="control-label" for="username">Usuario</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="fa fa-user"></span>
+                        </span>
+                        <input  class="form-control" type="text" disabled name="LoginUsernamePV" id="LoginUsernamePV" value="" placeholder="ejemplo@elflorido.com.mx" autocomplete="off" />
+                    </div>
+                    <span class="help-block small">Tu usuario para el sistema</span>
+                </div>
+                <div class="form-group" title="Favor de introducir su contraseña" data-placement="left" data-toggle="tooltip">
+                    <label class="control-label" for="password">Contraseña</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="fa fa-key"></span>
+                        </span>
+                        <input style="-webkit-text-security: square;"  class="form-control" type="text" name="LoginPasswordPV" id="LoginPasswordPV" value="" placeholder="*********" autocomplete="off" />
+                    </div>
+                    <span class="help-block small">Tu contraseña</span>
+                </div>
+                <br />
+                <div>
+                    <ol class="hbreadcrumb breadcrumb">
+                        <li id="PassWordLi">
+                            <a href="~/home/RecoveryPassword" data-toggle="tooltip" data-placement="left" target="_blank" title="Click para recuperar su contraseña">•(Olvide mi contraseña)</a>
+                        </li>
+                        <li id="BlockLi" class="">
+                            <a href="~/home/Unlocking" data-toggle="tooltip" data-placement="top" target="_blank" title="Click para desbloqueo de usuarios">•(Desbloquear mi cuenta)</a>
+                        </li>
+                    </ol>
+                </div>
+                <button id="btnReloadLoginPV" class="btn btn-info btn-block"><i class="fa fa-check"></i>  Iniciar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="fab-container-g hide" id="DivMainFloridinFab">
+    <div class="fab-g fab-icon-holder-g">
+        <img id="imgMainbtnFloatinMain" src="~/styles/Floridin/2.png" style="width: 50px; height: auto; margin-left:5px; margin-top:13px;" />
+    </div>
+
+    <ul class="fab-options-g">
+        <li>
+            <span onclick="ModalAddXMLPV();" class="fab-label-g">Consultar Facturas</span>
+            <div onclick="ModalAddXMLPV();" class="fab-icon-holder-g">
+                <i class="pe-7s-server"></i>
+            </div>
+        </li>
+        <li>
+            <span onclick="CallGenericPartialViewTemporal(1);" class="fab-label-g">Devoluciones</span>
+            <div onclick="CallGenericPartialViewTemporal(1);" class="fab-icon-holder-g">
+                <i class="pe-7s-copy-file"></i>
+            </div>
+        </li>
+        <li>
+            <span onclick="CallGenericPartialViewTemporal(2);" class="fab-label-g">DIOT</span>
+            <div onclick="CallGenericPartialViewTemporal(2);" class="fab-icon-holder-g">
+                <i class="pe-7s-notebook"></i>
+            </div>
+        </li>
+        <li>
+            <span onclick="CallGenericPartialViewTemporal(3);" class="fab-label-g">CFDI Relacionados</span>
+            <div onclick="CallGenericPartialViewTemporal(3);" class="fab-icon-holder-g">
+                <i class="pe-7s-folder"></i>
+            </div>
+        </li>
+        <li>
+            <span onclick="CallGenericPartialViewTemporal(4);" class="fab-label-g">NC Manuales</span>
+            <div onclick="CallGenericPartialViewTemporal(4);" class="fab-icon-holder-g">
+                <i class="pe-7s-albums"></i>
+            </div>
+        </li>
+    </ul>
+</div>
